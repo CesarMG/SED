@@ -9,6 +9,7 @@
 .\main.o: H:\Programas\Keil\ARM\ARMCC\bin\..\include\stdio.h
 .\main.o: H:\Programas\Keil\ARM\ARMCC\bin\..\include\stdlib.h
 .\main.o: H:\Programas\Keil\ARM\ARMCC\bin\..\include\Math.h
+.\main.o: H:\Programas\Keil\ARM\ARMCC\bin\..\include\string.h
 .\main.o: configuraciones.h
 .\main.o: funciones.h
 .\main.o: uart.h

@@ -275,3 +275,65 @@ main.c(720): error:  #20: identifier "buffer_umbral" is undefined
 compiling interrupciones.c...
 ".\nuevas_pruebas.axf" - 2 Errors, 5 Warning(s).
 Target not created
+Build target 'miniDK2'
+compiling main.c...
+linking...
+.\nuevas_pruebas.axf: Error: L6218E: Undefined symbol FLAG_AUTO (referred from interrupciones.o).
+.\nuevas_pruebas.axf: Error: L6218E: Undefined symbol FLAG_DETEC (referred from interrupciones.o).
+.\nuevas_pruebas.axf: Error: L6218E: Undefined symbol FLAG_EINT0_PULSO (referred from interrupciones.o).
+.\nuevas_pruebas.axf: Error: L6218E: Undefined symbol FLAG_EINT_SERVO (referred from interrupciones.o).
+.\nuevas_pruebas.axf: Error: L6218E: Undefined symbol FLAG_OFFLINE (referred from interrupciones.o).
+.\nuevas_pruebas.axf: Error: L6218E: Undefined symbol FLAG_ONLINE (referred from interrupciones.o).
+.\nuevas_pruebas.axf: Error: L6218E: Undefined symbol temp_I2C (referred from interrupciones.o).
+".\nuevas_pruebas.axf" - 7 Errors, 0 Warning(s).
+Target not created
+Build target 'miniDK2'
+compiling main.c...
+linking...
+.\nuevas_pruebas.axf: Error: L6218E: Undefined symbol temp_I2C (referred from interrupciones.o).
+".\nuevas_pruebas.axf" - 1 Errors, 0 Warning(s).
+Target not created
+Build target 'miniDK2'
+compiling main.c...
+linking...
+Program Size: Code=18528 RO-data=7912 RW-data=92 ZI-data=708  
+".\nuevas_pruebas.axf" - 0 Errors, 0 Warning(s).
+Build target 'miniDK2'
+compiling main.c...
+linking...
+.\nuevas_pruebas.axf: Error: L6218E: Undefined symbol temp (referred from funciones.o).
+".\nuevas_pruebas.axf" - 1 Errors, 0 Warning(s).
+Target not created
+Build target 'miniDK2'
+compiling main.c...
+main.c(94): warning:  #111-D: statement is unreachable
+compiling configuraciones.c...
+configuraciones.c(96): warning:  #223-D: function "I2CSendAddr" declared implicitly
+configuraciones.c(97): warning:  #223-D: function "I2CSendByte" declared implicitly
+configuraciones.c(99): warning:  #223-D: function "I2CSendStop" declared implicitly
+configuraciones.c(101): warning:  #223-D: function "I2Cdelay" declared implicitly
+compiling funciones.c...
+funciones.c(35): warning:  #223-D: function "I2CSendAddr" declared implicitly
+funciones.c(36): warning:  #223-D: function "I2CSendByte" declared implicitly
+funciones.c(37): warning:  #223-D: function "I2CSendStop" declared implicitly
+funciones.c(43): warning:  #223-D: function "I2CGetByte" declared implicitly
+linking...
+Program Size: Code=18540 RO-data=7916 RW-data=92 ZI-data=708  
+".\nuevas_pruebas.axf" - 0 Errors, 9 Warning(s).
+Build target 'miniDK2'
+compiling main.c...
+linking...
+Program Size: Code=19552 RO-data=8000 RW-data=92 ZI-data=708  
+".\nuevas_pruebas.axf" - 0 Errors, 0 Warning(s).
+Load "C:\\Users\\Cesar\\OneDrive\\Documentos\\Escritorio\\Nuevas pruebas_2_2_2\\SED\\Nuevas pruebas_2_1\\Nuevas pruebas_2_1\\Nuevas pruebas\\nuevas_pruebas.axf" 
+Erase Done.
+Programming Done.
+Verify OK.
+Build target 'miniDK2'
+compiling main.c...
+main.c(231): error:  #20: identifier "Flag" is undefined
+main.c(236): error:  #20: identifier "aux2" is undefined
+main.c(271): error:  #20: identifier "FLAG_init_timer" is undefined
+main.c(290): error:  #20: identifier "aux2" is undefined
+".\nuevas_pruebas.axf" - 4 Errors, 0 Warning(s).
+Target not created

@@ -55,7 +55,7 @@ float leer_Temperatura_I2C()    // Lee la temperatura del sensor de I2C
 		I2CSendStop();										   // Termina la comunicacion
 
 		return temperaturaI2C;		
-}// Leer_temperatura_I2C
+}// Leer_temperatura_I2C */
 	
 void mostrar_resultados()			// Muestra los resultados por pantalla
 {

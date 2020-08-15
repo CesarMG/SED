@@ -19,5 +19,6 @@ void config_TIMER0(void);
 void config_TIMER1(void);
 void config_TIMER2(void);
 void config_TIMER3(void);
+void config_prioridades(void);
 
 #endif
