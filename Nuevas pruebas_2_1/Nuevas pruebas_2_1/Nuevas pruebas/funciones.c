@@ -60,29 +60,24 @@ float leer_Temperatura_I2C()    // Lee la temperatura del sensor de I2C
 void mostrar_resultados()			// Muestra los resultados por pantalla
 {
 
-//		GUI_Text(30 ,145, "A",CYAN,BLACK);
-//		sprintf(linea1, "B",    grados);
-//		drawString(30, 145, "A", WHITE, BLACK, MEDIUM);
-//		drawString(70, 165, linea1, WHITE, BLACK, MEDIUM);
+	char buff[20];
+	drawString(30, 125, "Medidas realizadas:", WHITE, BLACK, MEDIUM);
+	drawString(30, 145, "Angulo del servo:", WHITE, BLACK, MEDIUM);
+	sprintf(buff, "%d grados          ",    grados);
+	drawString(70, 165, buff, WHITE, BLACK, MEDIUM);
 	
-		sprintf(linea1, "%d grados          ",    grados);
-		//sprintf(linea2, "%.2f cm"  ,    distancia);
-		sprintf(linea3, "%3.2f grados        ", temperatura_global);
-		sprintf(linea4, "%3.2f grados         ", temperaturaI2C);
-
-		drawString(30, 125, "Medidas realizadas:", WHITE, BLACK, MEDIUM);
-		
-		drawString(30, 145, "Angulo del servo:", WHITE, BLACK, MEDIUM);
-		drawString(70, 165, linea1, WHITE, BLACK, MEDIUM);
-		
-		//drawString(30, 185, "Distancia:", WHITE, BLACK, MEDIUM);
-		//drawString(70, 205, linea2, WHITE, BLACK, MEDIUM);
-		
-		drawString(30, 225, "Temperatura LM35:", WHITE, BLACK, MEDIUM);
-		drawString(70, 245, linea3 , WHITE, BLACK, MEDIUM);
-		
-		drawString(30, 265, "Temperatura I2C: ", WHITE, BLACK, MEDIUM);
-		drawString(70, 285, linea4, WHITE, BLACK, MEDIUM);
+	//drawString(30, 185, "Distancia:", WHITE, BLACK, MEDIUM);
+	//sprintf(buff, "%.2f cm"  ,    distancia);
+	//drawString(70, 205, buff, WHITE, BLACK, MEDIUM);
+	
+	drawString(30, 225, "Temperatura LM35:", WHITE, BLACK, MEDIUM);
+	sprintf(buff, "%3.2f grados        ", temperatura_global);
+	drawString(70, 245, buff , WHITE, BLACK, MEDIUM);
+	
+	
+	drawString(30, 265, "Temperatura I2C: ", WHITE, BLACK, MEDIUM);
+	sprintf(buff, "%3.2f grados         ", temperaturaI2C);
+	drawString(70, 285, buff, WHITE, BLACK, MEDIUM);
 		
 } // Mostrar_resultados
 
