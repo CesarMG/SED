@@ -103,3 +103,17 @@ Load "C:\\Users\\Cesar\\OneDrive\\Documentos\\Escritorio\\Nuevas pruebas_2_2_2\\
 Erase Done.
 Programming Done.
 Verify OK.
+Build target 'miniDK2'
+compiling configuraciones.c...
+configuraciones.c(96): warning:  #223-D: function "I2CSendAddr" declared implicitly
+configuraciones.c(97): warning:  #223-D: function "I2CSendByte" declared implicitly
+configuraciones.c(99): warning:  #223-D: function "I2CSendStop" declared implicitly
+configuraciones.c(101): warning:  #223-D: function "I2Cdelay" declared implicitly
+compiling funciones.c...
+funciones.c(35): warning:  #223-D: function "I2CSendAddr" declared implicitly
+funciones.c(36): warning:  #223-D: function "I2CSendByte" declared implicitly
+funciones.c(37): warning:  #223-D: function "I2CSendStop" declared implicitly
+funciones.c(43): warning:  #223-D: function "I2CGetByte" declared implicitly
+linking...
+Program Size: Code=23308 RO-data=8540 RW-data=108 ZI-data=1772  
+".\nuevas_pruebas.axf" - 0 Errors, 8 Warning(s).

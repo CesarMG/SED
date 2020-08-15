@@ -2,7 +2,7 @@
 #include "lcddriver.h"
 #include <stdio.h>
 #include <Math.H>
-
+#include "uart.h"
 #define Fpclk			 25e6		// Fcpu/4 (defecto después del reset)
 #define N_muestras 32     // muestras del DAC (antes eran 20)
 #define PI				 3.141592

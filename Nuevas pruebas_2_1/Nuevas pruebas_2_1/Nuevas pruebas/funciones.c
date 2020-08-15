@@ -61,19 +61,19 @@ void mostrar_resultados()			// Muestra los resultados por pantalla
 {
 
 	char buff[20];
+	
 	drawString(30, 125, "Medidas realizadas:", WHITE, BLACK, MEDIUM);
 	drawString(30, 145, "Angulo del servo:", WHITE, BLACK, MEDIUM);
 	sprintf(buff, "%d grados          ",    grados);
 	drawString(70, 165, buff, WHITE, BLACK, MEDIUM);
 	
-	//drawString(30, 185, "Distancia:", WHITE, BLACK, MEDIUM);
-	//sprintf(buff, "%.2f cm"  ,    distancia);
-	//drawString(70, 205, buff, WHITE, BLACK, MEDIUM);
+	drawString(30, 185, "Distancia:", WHITE, BLACK, MEDIUM);
+	sprintf(buff, "%.2f cm"  ,    distancia);
+	drawString(70, 205, buff, WHITE, BLACK, MEDIUM);
 	
 	drawString(30, 225, "Temperatura LM35:", WHITE, BLACK, MEDIUM);
 	sprintf(buff, "%3.2f grados        ", temperatura_global);
 	drawString(70, 245, buff , WHITE, BLACK, MEDIUM);
-	
 	
 	drawString(30, 265, "Temperatura I2C: ", WHITE, BLACK, MEDIUM);
 	sprintf(buff, "%3.2f grados         ", temperaturaI2C);
@@ -83,12 +83,18 @@ void mostrar_resultados()			// Muestra los resultados por pantalla
 
 void mostrar_medidas_uart()			//COLOCAR EN EL IRQ DEL TIMER 0 (del que interrumpe cada 0.5 seg)- ADC_HANDLER
 {
-//		sprintf(buffer_temp_glob, "\n Temperatura LM35 : %3.2f grados        ", temperatura_global);
-//		tx_cadena_UART0(buffer_temp_glob);
-//		while(tx_completa==0);
-//		tx_completa=0;					//Se transmite la cadena de buffer	
-//		sprintf(buffer_temp_I2C, "\n Temperatura I2C : %3.2f grados        ", temperaturaI2C);
-//		tx_cadena_UART0(buffer_temp_I2C);
-//		while(tx_completa==0);
-//		tx_completa=0;					//Se transmite la cadena de buffer				
+	char buff[25];
+	
+	sprintf(buff, "\n Temperatura LM35 : %3.2f grados ", temperatura_global);
+	tx_cadena_UART0(buff);
+	while(tx_completa==0);
+	
+	sprintf(buff, "\n Temperatura I2C : %3.2f grados ", temperaturaI2C);
+	tx_cadena_UART0(buff);
+	while(tx_completa==0);
+	
+	sprintf(buff, "\n Distancia : %3.2f grados", distancia);
+	tx_cadena_UART0(buff);
+	while(tx_completa==0);
+	
 }//mostrar_medidas_uart
