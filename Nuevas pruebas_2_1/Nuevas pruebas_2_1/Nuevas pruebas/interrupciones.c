@@ -82,6 +82,7 @@ void TIMER0_IRQHandler(void)	//TIMER0 (cada 0,5 seg)
 			mostrar_resultados_DAC();
 			//FLAG_ADC= 1;
 		}
+		
 	}
 	/*
 	if(FLAG_OFFLINE == 1)
@@ -135,7 +136,7 @@ void ADC_IRQHandler(void)
 		//FLAG_ADC= 1;
 	}
 	
-	else if(FLAG_TIMER0 && FLAG_ONLINE ) //&& (FLAG_DETEC)
+	else if(FLAG_TIMER0 && FLAG_ONLINE) //&& (FLAG_DETEC)
 	{
 		FLAG_TIMER0 = 0;
 		mostrar_medidas_uart();

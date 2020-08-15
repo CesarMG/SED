@@ -10,3 +10,5 @@
 .\funciones.o: H:\Programas\Keil\ARM\ARMCC\bin\..\include\stdio.h
 .\funciones.o: H:\Programas\Keil\ARM\ARMCC\bin\..\include\Math.H
 .\funciones.o: uart.h
+.\funciones.o: funciones.h
+.\funciones.o: uart.h

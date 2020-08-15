@@ -9,3 +9,6 @@
 .\interrupciones.o: lcddriver.h
 .\interrupciones.o: H:\Programas\Keil\ARM\ARMCC\bin\..\include\stdio.h
 .\interrupciones.o: uart.h
+.\interrupciones.o: funciones.h
+.\interrupciones.o: H:\Programas\Keil\ARM\ARMCC\bin\..\include\Math.H
+.\interrupciones.o: uart.h

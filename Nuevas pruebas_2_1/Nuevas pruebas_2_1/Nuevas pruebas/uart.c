@@ -9,6 +9,56 @@
  */
 #include <LPC17xx.h>
 #include "uart.h"
+#include <string.h>
+#include <stdlib.h>
+
+void analizo_detec()
+{
+	int paso = 0;
+	int n_umbral = 0;
+	if(strcmp (buffer, "+\r") == 0) 
+	{
+		if(grados<180)
+		set_servo(grados+=10);						
+					
+	} 
+	else if(strcmp (buffer, "-\r") == 0) 
+	{
+		if(grados>0)
+			set_servo(grados-=10);
+	}  
+		
+	else if(buffer[0] == 'U') 
+	{
+		
+		while(buffer[paso] != 13)
+		{
+			buffer[paso] = buffer[paso + 1];
+			paso++;
+		}
+		n_umbral = atoi(buffer);
+		
+		if((n_umbral<=300)&&(n_umbral>=30))
+		{	
+			umbral = n_umbral;
+			sprintf(buffer_umbral, "OK");
+			tx_cadena_UART0(buffer_umbral);
+
+		}		
+		else
+		{
+			sprintf(buffer_umbral, "CACA");
+			tx_cadena_UART0(buffer_umbral);
+			
+		}
+	}
+	else 
+	{
+		tx_cadena_UART0("\n\rOpcion seleccionada incorrecta\n\r");
+	}		
+		
+}
+		
 
 
 /*
@@ -21,11 +71,13 @@ void UART0_IRQHandler(void) {
 	case 0x04:								 /* RBR, Receiver Buffer Ready */
 	*ptr_rx=LPC_UART0->RBR; 	   			 /* lee el dato recibido y lo almacena */
 	    if (*ptr_rx++ ==13) 				// Caracter return --> Cadena completa
-	    					{
+	    				{
 							*ptr_rx=0;		/* Añadimos el caracter null para tratar los datos recibidos como una cadena*/ 
 							rx_completa = 1;/* rx completa */
 							ptr_rx=buffer;	/* puntero al inicio del buffer para nueva recepción */
-	    					}	
+	    				if(FLAG_DETEC)
+								analizo_detec();
+							}	
 		break;
 	
     
@@ -137,4 +189,3 @@ void uart0_init(int baudrate) {
 
     
 }
-

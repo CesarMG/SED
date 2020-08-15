@@ -13,4 +13,6 @@
 .\main.o: configuraciones.h
 .\main.o: funciones.h
 .\main.o: uart.h
+.\main.o: funciones.h
+.\main.o: uart.h
 .\main.o: interrupciones.h
