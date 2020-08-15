@@ -12,6 +12,7 @@ void  set_servo(uint8_t grados);
 float leer_Temperatura_I2C(void);
 void  mostrar_resultados(void);
 void 	mostrar_medidas_uart(void);
+void  mostrar_resultados_DAC(void);
 
 
 ///////// NUEVO MUNDO ////////
@@ -27,6 +28,7 @@ extern uint8_t FLAG_OFFLINE;
 extern uint8_t FLAG_ISP;	
 extern uint8_t FLAG_KEY1;
 extern uint8_t FLAG_KEY2;
+extern uint8_t FLAG_ADC;
 extern uint8_t FLAG_TIMER0; // Flag timer 0
 extern uint8_t FLAG_TIMER1; // Flag timer 1
 extern uint8_t FLAG_TIMER2; // Flag timer 2

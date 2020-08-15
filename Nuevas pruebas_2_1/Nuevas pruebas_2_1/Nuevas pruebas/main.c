@@ -49,6 +49,7 @@ uint8_t DAC_ON = 0;						// Flag activacion DAC
 uint8_t FLAG_MENU = 0;
 uint8_t FLAG_init_timer = 0;
 uint8_t FLAG_DISPARO_CONTINUO = 0;
+uint8_t FLAG_ADC = 0;
 //////////// ZONA PARA VARIABLES GLOBALES//////////
 
 uint8_t mode		  = 0;  // Variable de modo activo 
@@ -287,7 +288,33 @@ int main()
 					LPC_TIM3->TCR        = 0x01;      // Enable Timer	3		
 					FLAG_init_timer  =  1;						// Timer 0 inicializado
 				}
-			break;	
+			break;
+
+			case OFFLINE_D:	// Modo Deteccion obstaculos (offline)
+				if(FLAG_MENU == 0)
+				{
+					FLAG_MENU = 1;
+					fillScreen(BLACK);
+					drawString(100,22, "UAH-SED", BLACK, WHITE, MEDIUM);
+					drawString(20, 52, "PROYECTO SONAR ULTRASONICO", WHITE, BLACK, MEDIUM);
+					drawString(20, 72, "Ana Belen Bartolome", WHITE, BLACK, MEDIUM);
+					drawString(20, 92, "Cesar Murciego", WHITE, BLACK, MEDIUM);
+					set_servo(grados = 90);	 // Inicializamos servo a la posicion 90º
+					FLAG_OFFLINE 	= 1;
+					FLAG_DETEC		= 1;
+					FLAG_EINT_SERVO = 1;
+				}
+				
+				
+				if(FLAG_init_timer == 0)
+				{
+					LPC_TIM0->TCR   |= (1<<0);				// Habilitamos timer 0
+					LPC_TIM3->TCR    = 0x01;          // Enable Timer 3
+					FLAG_init_timer  =  1;						// Timer 0 inicializado
+				}			
+				
+	
+			break;
 					
 				
 			case ONLINE:
@@ -387,63 +414,66 @@ int main()
 						tx_cadena_UART0("\n\rOpcion seleccionada incorrecta\n\r");
 					rx_completa = 0;
 				}
-		break;
+			break;
 			
-		case ONLINE_M_C: // Modo manual - medidas continuas (online)
-			if(FLAG_init_timer == 0)
-			{
-				LPC_TIM0->TCR   |= (1<<0);			// Habilitamos timer 0
-				LPC_TIM3->TCR        = 0x01;    // Enable Timer 3
-				FLAG_init_timer  =  1;					// Timer 0 inicializado
-			}
-			
-			if(FLAG_MENU == 0)
-			{
-				tx_cadena_UART0("Introduce: \n 1. Mover el servo a la derecha -> + \n 2. Mover el servo hacia la izquierda -> - \n 3. Disparar -> S \n\r");
-				while(tx_completa == 0);
-				FLAG_MENU=1;
-			}
-				
-				
-			if(rx_completa == 1)
-			{
-				if(strcmp (buffer, "+\r") == 0) 
+			case ONLINE_M_C: // Modo manual - medidas continuas (online)
+				if(FLAG_init_timer == 0)
 				{
-					if(grados<180)
-						set_servo(grados+=10);
+					LPC_TIM0->TCR   |= (1<<0);			// Habilitamos timer 0
+					LPC_TIM3->TCR        = 0x01;    // Enable Timer 3
+					FLAG_init_timer  =  1;					// Timer 0 inicializado
+				}
+				
+				if(FLAG_MENU == 0)
+				{
+					tx_cadena_UART0("Introduce: \n 1. Mover el servo a la derecha -> + \n 2. Mover el servo hacia la izquierda -> - \n 3. Disparar -> S \n\r");
+					while(tx_completa == 0);
+					FLAG_MENU=1;
+				}
+					
+					
+				if(rx_completa == 1)
+				{
+					if(strcmp (buffer, "+\r") == 0) 
+					{
+						if(grados<180)
+							set_servo(grados+=10);
+
+					}
+					else if(strcmp (buffer, "-\r") == 0) 
+					{
+						if(grados>0)
+							set_servo(grados-=10);
+					}  
+					else if(strcmp (buffer, "S\r") == 0)
+					{
+						FLAG_DISPARO_CONTINUO = 1;
+					}		
+					else 
+					{
+						tx_cadena_UART0("\n\rOpcion seleccionada incorrecta\n\r");
+					}
 
 				}
-				else if(strcmp (buffer, "-\r") == 0) 
+				
+			break;
+			
+			case ONLINE_A:	// Modo Automatico (online)
+				
+				if(FLAG_init_timer == 0)
 				{
-					if(grados>0)
-						set_servo(grados-=10);
-				}  
-				else if(strcmp (buffer, "S\r") == 0)
-				{
-					FLAG_DISPARO_CONTINUO = 1;
-				}		
-				else 
-				{
-					tx_cadena_UART0("\n\rOpcion seleccionada incorrecta\n\r");
+					LPC_TIM0->TCR   |= (1<<0);				// Habilitamos timer 0
+					LPC_TIM3->TCR        = 0x01;      // Enable Timer	3		
+					FLAG_init_timer  =  1;						// Timer 0 inicializado
+					set_servo(grados = 0);
+					FLAG_ONLINE = 1;
+					FLAG_AUTO 	 = 1;
 				}
+			break;
+			
+			
 
-			}
 			
-		break;
-			
-		case ONLINE_A:	// Modo Automatico (online)
-			
-			if(FLAG_init_timer == 0)
-			{
-				LPC_TIM0->TCR   |= (1<<0);				// Habilitamos timer 0
-				LPC_TIM3->TCR        = 0x01;      // Enable Timer	3		
-				FLAG_init_timer  =  1;						// Timer 0 inicializado
-				set_servo(grados = 0);
-				FLAG_ONLINE = 1;
-				FLAG_AUTO 	 = 1;
-			}
-		break;
-
 		
 			
 			

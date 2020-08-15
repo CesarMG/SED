@@ -68,7 +68,7 @@ void mostrar_resultados()			// Muestra los resultados por pantalla
 	drawString(70, 165, buff, WHITE, BLACK, MEDIUM);
 	
 	drawString(30, 185, "Distancia:", WHITE, BLACK, MEDIUM);
-	sprintf(buff, "%.2f cm"  ,    distancia);
+	sprintf(buff, "%3.2f cm"  ,distancia);
 	drawString(70, 205, buff, WHITE, BLACK, MEDIUM);
 	
 	drawString(30, 225, "Temperatura LM35:", WHITE, BLACK, MEDIUM);
@@ -97,5 +97,29 @@ void mostrar_medidas_uart()			//COLOCAR EN EL IRQ DEL TIMER 0 (del que interrump
 	tx_cadena_UART0(buff);
 	while(tx_completa == 0);
 	//tx_completa = 0;
-	
+
+
 }//mostrar_medidas_uart
+
+void mostrar_resultados_DAC()			// Muestra los resultados por pantalla
+{
+	char buff[20];
+	
+	drawString(30, 125, "Medidas realizadas:", WHITE, BLACK, MEDIUM);
+	drawString(30, 145, "Angulo del servo:", WHITE, BLACK, MEDIUM);
+	sprintf(buff, "%d grados          ",    grados);
+	drawString(70, 165, buff, WHITE, BLACK, MEDIUM);
+	
+	drawString(30, 185, "Distancia:", WHITE, BLACK, MEDIUM);
+	sprintf(buff, "%d cm  "  ,(int)distancia);
+	drawString(70, 205, buff, WHITE, BLACK, MEDIUM);
+	
+	drawString(30, 225, "Temperatura LM35:", WHITE, BLACK, MEDIUM);
+	sprintf(buff, "%d grados        ", (int)temperatura_global);
+	drawString(70, 245, buff , WHITE, BLACK, MEDIUM);
+	
+	drawString(30, 265, "Temperatura I2C: ", WHITE, BLACK, MEDIUM);
+	sprintf(buff, "%d grados         ", (int)temperaturaI2C);
+	drawString(70, 285, buff, WHITE, BLACK, MEDIUM);
+		
+} // Mostrar_resultados

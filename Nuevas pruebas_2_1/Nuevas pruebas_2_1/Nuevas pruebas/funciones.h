@@ -17,6 +17,7 @@ void  genera_muestras(uint16_t muestras_ciclo);
 float leer_Temperatura_I2C(void);
 void  mostrar_resultados(void);
 void 	mostrar_medidas_uart(void);
+void  mostrar_resultados_DAC(void);
 
 #endif
 

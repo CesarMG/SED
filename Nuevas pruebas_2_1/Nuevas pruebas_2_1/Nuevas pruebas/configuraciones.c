@@ -14,7 +14,7 @@ void config_prioridades()
 	NVIC_SetPriority(EINT0_IRQn, 0);		// Asignamos prioridades a las interrupciones
 	NVIC_SetPriority(EINT1_IRQn, 0);
 	NVIC_SetPriority(EINT2_IRQn, 0);
-	NVIC_SetPriority(TIMER0_IRQn,3);
+	NVIC_SetPriority(TIMER0_IRQn,0);
 	NVIC_SetPriority(TIMER1_IRQn,2);    // Establecer prioridades
 	NVIC_SetPriority(TIMER2_IRQn,4); 	  // Establecer prioridades
 	NVIC_SetPriority(TIMER3_IRQn,1); 	  // Establecer prioridad

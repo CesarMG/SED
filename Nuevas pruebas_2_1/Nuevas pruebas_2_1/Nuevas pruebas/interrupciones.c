@@ -76,6 +76,12 @@ void TIMER0_IRQHandler(void)	//TIMER0 (cada 0,5 seg)
 			LPC_TIM1->TCR = (0<<0)|(1<<1);			// Deshabilitamos time1
 			DAC_ON = 0;
 		}
+		if(FLAG_TIMER0 && FLAG_OFFLINE && (FLAG_DETEC))
+		{
+			FLAG_TIMER0 = 0;
+			mostrar_resultados_DAC();
+			//FLAG_ADC= 1;
+		}
 	}
 	/*
 	if(FLAG_OFFLINE == 1)
@@ -95,6 +101,7 @@ void TIMER1_IRQHandler(void)												// TIMER del DAC
 		LPC_TIM1->IR|=(1<<0);														// Borro el flag de la interrupcion
 		LPC_DAC->DACR=muestras[indice_muestra++]<<6;		// Desplazamient bit6...bit15 para colocarlos bien
 		indice_muestra &= 0x1F;
+	
 }
 
 void TIMER2_IRQHandler(void)					// TIMER pulso alto
@@ -121,12 +128,14 @@ void TIMER3_IRQHandler(void) 													//TIMER para el Capture
 void ADC_IRQHandler(void)
 {
 	float temperatura;
-	if(FLAG_TIMER0 && FLAG_OFFLINE)
+	if(FLAG_TIMER0 && FLAG_OFFLINE && (!FLAG_DETEC))
 	{
 		FLAG_TIMER0 = 0;
 		mostrar_resultados();
+		//FLAG_ADC= 1;
 	}
-	else if(FLAG_TIMER0 && FLAG_ONLINE && tx_completa)
+	
+	else if(FLAG_TIMER0 && FLAG_ONLINE ) //&& (FLAG_DETEC)
 	{
 		FLAG_TIMER0 = 0;
 		mostrar_medidas_uart();
