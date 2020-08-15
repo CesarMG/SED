@@ -6,3 +6,10 @@
 .\uart.o: H:\Programas\Keil\ARM\CMSIS\Include\core_cmFunc.h
 .\uart.o: H:\Programas\Keil\ARM\Inc\NXP\LPC17xx\system_LPC17xx.h
 .\uart.o: uart.h
+.\uart.o: funciones.h
+.\uart.o: lcddriver.h
+.\uart.o: H:\Programas\Keil\ARM\ARMCC\bin\..\include\stdio.h
+.\uart.o: H:\Programas\Keil\ARM\ARMCC\bin\..\include\Math.H
+.\uart.o: uart.h
+.\uart.o: H:\Programas\Keil\ARM\ARMCC\bin\..\include\string.h
+.\uart.o: H:\Programas\Keil\ARM\ARMCC\bin\..\include\stdlib.h

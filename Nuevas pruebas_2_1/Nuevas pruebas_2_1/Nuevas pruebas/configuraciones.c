@@ -4,22 +4,38 @@
 ///// CONFIGURACIONES   /////
 /////////////////////////////
 
+
+
+void config_prioridades()
+{
+	NVIC_SetPriorityGrouping(0);
+	NVIC_SetPriority(ADC_IRQn,   5);
+	NVIC_SetPriority(UART0_IRQn, 0);
+	NVIC_SetPriority(EINT0_IRQn, 0);		// Asignamos prioridades a las interrupciones
+	NVIC_SetPriority(EINT1_IRQn, 0);
+	NVIC_SetPriority(EINT2_IRQn, 0);
+	NVIC_SetPriority(TIMER0_IRQn,0);
+	NVIC_SetPriority(TIMER1_IRQn,2);    // Establecer prioridades
+	NVIC_SetPriority(TIMER2_IRQn,4); 	  // Establecer prioridades
+	NVIC_SetPriority(TIMER3_IRQn,1); 	  // Establecer prioridad
+}
+
 void config_pines()
 {
-		LPC_GPIO1->FIODIR |= (1U<<31); 		// pin 1.31 -> Declarar como salida el pin del pulso
-		LPC_GPIO1->FIOCLR |= (1U<<31);		// pin 1.31 -> Aseguramos un nivel bajo
+	/*
+		Configuración del trigger
+	*/
+	LPC_GPIO1->FIODIR |= (1U<<31); 		// pin 1.31 -> Declarar como salida el pin del pulso
+	LPC_GPIO1->FIOCLR |= (1U<<31);		// pin 1.31 -> Aseguramos un nivel bajo
 }
 void config_externas()
-{																									// EINT 0 (P2.10), EINT 1 (P2.11), EINT 2(P2.12)
+{	
+	/*
+		EINT 0 (P2.10), EINT 1 (P2.11), EINT 2(P2.12)
+	*/
 	LPC_PINCON->PINSEL4 |= (1<<20)|(1<<22)|(1<<24);	// configuramos pines para EINT
 	LPC_SC->EXTMODE |= (1<<0)|(1<<1)|(1<<2);				// Activacion por flanco
 	LPC_SC->EXTPOLAR = 0;														// de bajada
-	
-	NVIC_SetPriorityGrouping(2);
-	
-	NVIC_SetPriority(EINT0_IRQn, 1);				// Asignamos prioridades a las interrupciones
-	NVIC_SetPriority(EINT1_IRQn, 1);
-	NVIC_SetPriority(EINT2_IRQn, 1);
 	
 	NVIC_EnableIRQ(EINT0_IRQn);							// Habilitamos las interrupciones
 	NVIC_EnableIRQ(EINT1_IRQn);
@@ -27,8 +43,11 @@ void config_externas()
 	
 }//config_externas
 
-void config_pwm1(void)				  				// PWM para mover el servo
+void config_pwm1(void)				  				
 {
+	/*
+		PWM para mover el servo
+	*/
 	LPC_PINCON->PINSEL3 |= (2<<8); 				// P1.20 salida PWM (PWM1.2)
 	
 	LPC_SC->PCONP |= (1<<6);							// Alimentamos PWM 1
@@ -37,19 +56,24 @@ void config_pwm1(void)				  				// PWM para mover el servo
 	LPC_PWM1->MCR	|= (1<<1);							// Reset on Match
 	LPC_PWM1->TCR	|= (1<<0)|(1<<3);				// Start
 	
-}//config_pwm1
+}
 
 void config_DAC(void)										
 {
-		LPC_PINCON->PINSEL1  |= (2<<20);		// AOUT en el pin P0.26
-		LPC_PINCON->PINMODE1 |= (2<<20);		// Pull-up-pull-down deshabilitado
-		LPC_DAC->DACCTRL      = 0;					// Deshabilita el modo DMA
+	/*
+		Configuración del DAC
+	*/
+	LPC_PINCON->PINSEL1  |= (2<<20);		// AOUT en el pin P0.26
+	LPC_PINCON->PINMODE1 |= (2<<20);		// Pull-up-pull-down deshabilitado
+	LPC_DAC->DACCTRL      = 0;					// Deshabilita el modo DMA
 	//LPC_SC->PCLKSEL0|=(0x00<<22);			  // El DAC trabaja como maximo a 1MHz (CCLK/4)
-	
-}//config_DAC
+}
 
 void config_ADC(void)
 {
+	/*
+		config_ADC
+	*/
 	LPC_SC->PCONP					|= (1<<12);			// Habilitar ADC
 	LPC_PINCON->PINSEL1		 = (1<<18); 		// Habilitamos el AD0.2 en el P0.25
 	LPC_PINCON->PINMODE1   = (2<<18);		  // Quitar resistencias de pull-up y pull-down
@@ -62,7 +86,7 @@ void config_ADC(void)
 	NVIC_EnableIRQ(ADC_IRQn);				      // Habilito la interrupcion del ADC
 	NVIC_SetPriority(ADC_IRQn, 2);
 
-}//config_ADC
+}
 
 void config_DS1621()
 {
@@ -84,61 +108,51 @@ void config_DS1621()
 
 void config_TIMER0()      // TIMER0 (interrumpe cada 0,5 seg) 
 {
-	//LPC_PINCON->PINSEL3 |= (3 << 26); //P1.29 como MAT0.1
-  //LPC_PINCON->PINSEL3 |= (3 << 24); //P1.28 como MAT0.0
-	//LPC_TIM0->EMR = (3 << 6);			//...y hace toggle...
-	
 	LPC_SC->PCONP	|=(1<<1);			     // Alimentamos TIMER0
 	LPC_TIM0->PR	 =0;							 // Prescaler a 1
 	LPC_TIM0->MCR |=(3<<0);				   // Interrumpe y resetea MR0
 	LPC_TIM0->MR0=(Fpclk*0.5-1);     // Interrumpe cada 0,5 seg
 	
-	//NVIC_SetPriority(TIMER0_IRQn,2);    // Establecer prioridades - SI LO ACTIVAS DEJA DE FUNCIONAR EN EL 212
 	NVIC_EnableIRQ(TIMER0_IRQn);	   // Habilito la interrupcion del TIMER0
 	
 }//config_TIMER0
 
 void config_TIMER1(void)   // TIMER DAC
 {
-		LPC_SC->PCONP |= (1<<2);						// Habilitar Timer 1
+	LPC_SC->PCONP |= (1<<2);						// Habilitar Timer 1
 
-		LPC_TIM1->PR   = 0;				  		    // Prescaler=1
-		LPC_TIM1->MCR |= (1<<0)|(1<<1);   	// Interrupcion y reset para MR0 
-		LPC_TIM1->EMR  = (1<<1);							// Cuando ocurra el Match 1.0, que no haga nada en el pin
-		LPC_TIM1->TCR  = (0<<0);						// Power On TIMER1->Desactivado
+	LPC_TIM1->PR   = 0;				  		    // Prescaler=1
+	LPC_TIM1->MCR |= (1<<0)|(1<<1);   	// Interrupcion y reset para MR0 
+	LPC_TIM1->EMR  = (1<<1);						// Cuando ocurra el Match 1.0, que no haga nada en el pin
+	LPC_TIM1->TCR  = (0<<0);						// Power On TIMER1->Desactivado
 	
-		NVIC_SetPriority(TIMER1_IRQn,2);    // Establecer prioridades
-		NVIC_EnableIRQ(TIMER1_IRQn);		    // Habilitar interrupcion
 	
-// LPC_PINCON->PINSEL3|=(3<<12);				//Match 1.0 (P1.22)
-// LPC_TIM1->MR0=(Fpclk/umbral/N_muestras)-1;//Match para el DAC
+	NVIC_EnableIRQ(TIMER1_IRQn);		    // Habilitar interrupcion
 	
 }//config_TIMER1
 
 void config_TIMER2(void)   // Timer Pulso alto (trigger)
 {
-		LPC_SC->PCONP |= (1<<22); 					// Alimenta TIMER0
-		LPC_TIM2->MCR  = 0x07; 						  // con 7 activo los 3 bits: STOP, Interrupción, Reset
-		LPC_TIM2->MR0  = (Fpclk*2e-5)-1; 		// 20micro segundos
-		LPC_TIM2->TCR  = 0;			  				  // Apagar TIMER
+	LPC_SC->PCONP |= (1<<22); 					// Alimenta TIMER0
+	LPC_TIM2->MCR  = 0x07; 						  // con 7 activo los 3 bits: STOP, Interrupción, Reset
+	LPC_TIM2->MR0  = (Fpclk*2e-5)-1; 		// 20micro segundos
+	LPC_TIM2->TCR  = 0;			  				  // Apagar TIMER
+
 	
-		NVIC_SetPriority(TIMER2_IRQn,2); 	  // Establecer prioridades
-		NVIC_EnableIRQ(TIMER2_IRQn); 			  // Habilitar interrupción
+	NVIC_EnableIRQ(TIMER2_IRQn); 			  // Habilitar interrupción
 	
 }//config_TIMER2
 
 void config_TIMER3()		  // TIMER3 (capture)
 {
-		LPC_SC->PCONP       |= (1<<23); 		// Alimentamos el TIMER3
-		LPC_PINCON->PINSEL1 |= (3<<14);			// Selecciono CAP3.0	P0.23
-		LPC_PINCON->PINSEL1 |= (3<<16);			// Selecciono CAP3.1 P0.24
-		LPC_TIM3->PR				 = 24;
-		LPC_TIM3->CCR 			 = (1<<0)|      // CAP3.0 flanco de subida
-													 (1<<4)|      // CAP3.1 flanco bajada 
-													 (1<<5);      // con interrupción
-		
+	LPC_SC->PCONP       |= (1<<23); 		// Alimentamos el TIMER3
+	LPC_PINCON->PINSEL1 |= (3<<14);			// Selecciono CAP3.0	P0.23
+	LPC_PINCON->PINSEL1 |= (3<<16);			// Selecciono CAP3.1 P0.24
+	LPC_TIM3->PR				 = 24;
+	LPC_TIM3->CCR 			 = (1<<0)|      // CAP3.0 flanco de subida
+												 (1<<4)|      // CAP3.1 flanco bajada 
+												 (1<<5);      // con interrupción
 	
-		NVIC_SetPriority(TIMER3_IRQn,2); 	  // Establecer prioridad
-		NVIC_EnableIRQ(TIMER3_IRQn);			  // Habilitar interrupción    
+	NVIC_EnableIRQ(TIMER3_IRQn);			  // Habilitar interrupción    
 	
 }//Config_TIMER3

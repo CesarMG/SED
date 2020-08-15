@@ -7,7 +7,8 @@
 
 #ifndef UART_H_
 #define UART_H_
-
+#include <LPC17xx.H>
+#include "funciones.h"
 // Accepted Error baud rate value (in percent unit)
 #define UART_ACCEPTED_BAUDRATE_ERROR    3
 
@@ -27,11 +28,17 @@ extern char *ptr_rx;	// puntero de recepción
 extern char rx_completa;// Flag de recepción de cadena completa que se activa al recibir CR(0x0D)
 extern char *ptr_tx;			// puntero de transmisión
 extern char tx_completa;		// Flag de transmisión de cadena completa
-
+extern uint8_t FLAG_ONLINE;
 extern void uart0_init(int baudrate);
 extern void tx_cadena_UART0(char *ptr);
+extern char buffer_umbral[30] ;
 
-extern char buffer_bt[30];	// Buffer de recepción
+
+extern uint8_t FLAG_DISPARO_CONTINUO;
+extern uint8_t grados;
+extern char aux4;
+extern int  aux5;
+extern int 	umbral;
 extern char *ptr_rx_bt;	// puntero de recepción
 extern char rx_completa_bt;// Flag de recepción de cadena completa que se activa al recibir CR(0x0D)
 extern char *ptr_tx_bt;			// puntero de transmisión

@@ -9,6 +9,88 @@
  */
 #include <LPC17xx.h>
 #include "uart.h"
+#include <string.h>
+#include <stdlib.h>
+#define ONLINE_M_U  	211
+#define ONLINE_M_C  	212
+
+void analizo_detec()
+{
+	int paso = 0;
+	int n_umbral = 0, n_r_servo = 10;
+	static int r_servo = 10;
+	if(strcmp (buffer, "+\r") == 0) 
+	{
+		if((grados+r_servo) <= 180)
+			set_servo(grados+=r_servo);						
+					
+	} 
+	else if(strcmp (buffer, "-\r") == 0) 
+	{
+		if((grados-r_servo)>=0)
+			set_servo(grados-=r_servo);
+	}
+	else if(strcmp (buffer, "S\r") == 0)
+	{
+		if(mode == ONLINE_M_U)
+			generar_pulso_alto();
+		if(mode == ONLINE_M_C)
+			FLAG_DISPARO_CONTINUO = 1;
+
+	}
+	else if(buffer[0] == 'R') 
+	{
+		while(buffer[paso] != 13)
+		{
+			buffer[paso] = buffer[paso + 1];
+			paso++;
+		}
+		n_r_servo = atoi(buffer);
+		
+		if((n_r_servo<=90)&&(n_r_servo>=5))
+		{	
+			r_servo = n_r_servo;
+			sprintf(buffer_umbral, "OK");
+			tx_cadena_UART0(buffer_umbral);
+		}		
+		else
+		{
+			sprintf(buffer_umbral, "MAL");
+			tx_cadena_UART0(buffer_umbral);
+	
+		} 
+	}
+	else if(buffer[0] == 'U') 
+	{
+		
+		while(buffer[paso] != 13)
+		{
+			buffer[paso] = buffer[paso + 1];
+			paso++;
+		}
+		n_umbral = atoi(buffer);
+		
+		if((n_umbral<=300)&&(n_umbral>=30))
+		{	
+			umbral = n_umbral;
+			sprintf(buffer_umbral, "OK");
+			tx_cadena_UART0(buffer_umbral);
+
+		}		
+		else
+		{
+			sprintf(buffer_umbral, "CACA");
+			tx_cadena_UART0(buffer_umbral);
+			
+		}
+	}
+	else 
+	{
+		tx_cadena_UART0("\n\rOpcion seleccionada incorrecta\n\r");
+	}		
+		
+}
+		
 
 
 /*
@@ -21,11 +103,13 @@ void UART0_IRQHandler(void) {
 	case 0x04:								 /* RBR, Receiver Buffer Ready */
 	*ptr_rx=LPC_UART0->RBR; 	   			 /* lee el dato recibido y lo almacena */
 	    if (*ptr_rx++ ==13) 				// Caracter return --> Cadena completa
-	    					{
+	    				{
 							*ptr_rx=0;		/* Añadimos el caracter null para tratar los datos recibidos como una cadena*/ 
 							rx_completa = 1;/* rx completa */
 							ptr_rx=buffer;	/* puntero al inicio del buffer para nueva recepción */
-	    					}	
+	    				if(FLAG_ONLINE)
+								analizo_detec();
+							}	
 		break;
 	
     
@@ -137,4 +221,3 @@ void uart0_init(int baudrate) {
 
     
 }
-
