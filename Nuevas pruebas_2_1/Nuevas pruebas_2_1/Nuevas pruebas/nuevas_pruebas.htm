@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\nuevas_pruebas.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\nuevas_pruebas.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5.03 [Build 76]: Last Updated: Sat Aug 15 19:48:25 2020
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5.03 [Build 76]: Last Updated: Sat Aug 15 20:07:22 2020
 <BR><P>
 <H3>Maximum Stack Usage =        320 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -446,13 +446,13 @@ Global Symbols
 <P><STRONG><a name="[32]"></a>SystemInit</STRONG> (Thumb, 290 bytes, Stack size 0 bytes, system_lpc17xx.o(.text))
 <BR>[Address Reference Count : 1]<UL><LI> startup_lpc17xx.o(.text)
 </UL>
-<P><STRONG><a name="[4a]"></a>main</STRONG> (Thumb, 2456 bytes, Stack size 16 bytes, main.o(.text))
+<P><STRONG><a name="[4a]"></a>main</STRONG> (Thumb, 2936 bytes, Stack size 16 bytes, main.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 296<LI>Call Chain = main &rArr; genera_muestras &rArr; sin &rArr; __ieee754_rem_pio2 &rArr; __aeabi_dmul
 </UL>
-<BR>[Calls]<UL><LI><a href="#[68]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strcmp
+<BR>[Calls]<UL><LI><a href="#[69]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strcmp
 <LI><a href="#[65]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;uart0_init
-<LI><a href="#[67]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tx_cadena_UART0
-<LI><a href="#[69]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_servo
+<LI><a href="#[68]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tx_cadena_UART0
+<LI><a href="#[67]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_servo
 <LI><a href="#[57]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lcdInitDisplay
 <LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;generar_pulso_alto
 <LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;genera_muestras
@@ -608,7 +608,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[4a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[69]"></a>set_servo</STRONG> (Thumb, 64 bytes, Stack size 40 bytes, funciones.o(.text))
+<P><STRONG><a name="[67]"></a>set_servo</STRONG> (Thumb, 64 bytes, Stack size 40 bytes, funciones.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 72<LI>Call Chain = set_servo &rArr; __aeabi_dmul
 </UL>
 <BR>[Calls]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dmul
@@ -674,7 +674,7 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_f2iz
 <LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
-<LI><a href="#[67]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tx_cadena_UART0
+<LI><a href="#[68]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tx_cadena_UART0
 </UL>
 <BR>[Called By]<UL><LI><a href="#[25]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_IRQHandler
 </UL>
@@ -689,18 +689,18 @@ Global Symbols
 <P><STRONG><a name="[22]"></a>EINT1_IRQHandler</STRONG> (Thumb, 58 bytes, Stack size 8 bytes, interrupciones.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = EINT1_IRQHandler &rArr; set_servo &rArr; __aeabi_dmul
 </UL>
-<BR>[Calls]<UL><LI><a href="#[69]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_servo
+<BR>[Calls]<UL><LI><a href="#[67]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_servo
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_lpc17xx.o(RESET)
 </UL>
 <P><STRONG><a name="[23]"></a>EINT2_IRQHandler</STRONG> (Thumb, 58 bytes, Stack size 8 bytes, interrupciones.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = EINT2_IRQHandler &rArr; set_servo &rArr; __aeabi_dmul
 </UL>
-<BR>[Calls]<UL><LI><a href="#[69]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_servo
+<BR>[Calls]<UL><LI><a href="#[67]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_servo
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_lpc17xx.o(RESET)
 </UL>
-<P><STRONG><a name="[10]"></a>TIMER0_IRQHandler</STRONG> (Thumb, 270 bytes, Stack size 40 bytes, interrupciones.o(.text))
+<P><STRONG><a name="[10]"></a>TIMER0_IRQHandler</STRONG> (Thumb, 272 bytes, Stack size 40 bytes, interrupciones.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 112<LI>Call Chain = TIMER0_IRQHandler &rArr; set_servo &rArr; __aeabi_dmul
 </UL>
 <BR>[Calls]<UL><LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_cfrcmple
@@ -710,7 +710,7 @@ Global Symbols
 <LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ddiv
 <LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dsub
 <LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;leer_Temperatura_I2C
-<LI><a href="#[69]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_servo
+<LI><a href="#[67]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_servo
 <LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;generar_pulso_alto
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_lpc17xx.o(RESET)
@@ -749,7 +749,7 @@ Global Symbols
 <P><STRONG><a name="[14]"></a>UART0_IRQHandler</STRONG> (Thumb, 110 bytes, Stack size 0 bytes, uart.o(.text))
 <BR>[Address Reference Count : 1]<UL><LI> startup_lpc17xx.o(RESET)
 </UL>
-<P><STRONG><a name="[67]"></a>tx_cadena_UART0</STRONG> (Thumb, 32 bytes, Stack size 0 bytes, uart.o(.text))
+<P><STRONG><a name="[68]"></a>tx_cadena_UART0</STRONG> (Thumb, 32 bytes, Stack size 0 bytes, uart.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mostrar_medidas_uart
 <LI><a href="#[4a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
@@ -1164,7 +1164,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_char_common
 </UL>
 
-<P><STRONG><a name="[68]"></a>strcmp</STRONG> (Thumb, 128 bytes, Stack size 0 bytes, strcmpv7m.o(.text))
+<P><STRONG><a name="[69]"></a>strcmp</STRONG> (Thumb, 128 bytes, Stack size 0 bytes, strcmpv7m.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[4a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 <LI><a href="#[44]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_get_lc_numeric
 </UL>
@@ -1412,7 +1412,7 @@ Global Symbols
 <P><STRONG><a name="[44]"></a>_get_lc_numeric</STRONG> (Thumb, 44 bytes, Stack size 8 bytes, lc_numeric_c.o(locale$$code))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = _get_lc_numeric
 </UL>
-<BR>[Calls]<UL><LI><a href="#[68]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strcmp
+<BR>[Calls]<UL><LI><a href="#[69]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strcmp
 </UL>
 <BR>[Called By]<UL><LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_lib_init_lc_numeric_2
 </UL>
@@ -1437,7 +1437,7 @@ Global Symbols
 <LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ieee754_rem_pio2
 <LI><a href="#[13]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIMER3_IRQHandler
 <LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;leer_Temperatura_I2C
-<LI><a href="#[69]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_servo
+<LI><a href="#[67]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_servo
 <LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;genera_muestras
 <LI><a href="#[d6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_poly
 </UL>
@@ -1460,7 +1460,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sin
 <LI><a href="#[25]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_IRQHandler
 <LI><a href="#[10]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIMER0_IRQHandler
-<LI><a href="#[69]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_servo
+<LI><a href="#[67]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_servo
 <LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;genera_muestras
 </UL>
 
@@ -1484,7 +1484,7 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = __aeabi_d2uiz
 </UL>
 <BR>[Called By]<UL><LI><a href="#[10]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIMER0_IRQHandler
-<LI><a href="#[69]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_servo
+<LI><a href="#[67]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_servo
 <LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;genera_muestras
 </UL>
 
@@ -1501,7 +1501,7 @@ Global Symbols
 <P><STRONG><a name="[73]"></a>__aeabi_ui2d</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, dflt_clz.o(x$fpl$dfltu))
 <BR><BR>[Called By]<UL><LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ieee754_rem_pio2
 <LI><a href="#[25]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_IRQHandler
-<LI><a href="#[69]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_servo
+<LI><a href="#[67]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_servo
 <LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;genera_muestras
 </UL>
 
@@ -1515,7 +1515,7 @@ Global Symbols
 <LI><a href="#[d5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_cos
 <LI><a href="#[25]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_IRQHandler
 <LI><a href="#[13]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIMER3_IRQHandler
-<LI><a href="#[69]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_servo
+<LI><a href="#[67]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_servo
 <LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;genera_muestras
 <LI><a href="#[d6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_poly
 </UL>

@@ -49,11 +49,12 @@ void TIMER0_IRQHandler(void)	//TIMER0 (cada 0,5 seg)
 	else if((FLAG_AUTO==1)&&(grados<=180))
 	{
 		generar_pulso_alto();
-		set_servo(grados += 10);
 		if(grados == 180)
-		{
 			set_servo(grados = 0);		
-		}
+		
+		else
+			set_servo(grados += 10);
+		
 	}
 	
 	else if(FLAG_DETEC == 1)	//modo deteccion obstaculos

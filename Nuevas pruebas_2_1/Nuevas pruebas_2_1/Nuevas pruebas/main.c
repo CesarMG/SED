@@ -177,8 +177,118 @@ int main()
 				}	
 
 			break;
+			case OFFLINE_M:	// Modo manual (offline)
+					
+					if(FLAG_MENU == 0)
+					{
+						FLAG_MENU = 1; 	
+						fillScreen(BLACK);
+						drawString(100,22, "UAH-SED", BLACK, WHITE, MEDIUM);
+						drawString(20, 52, "PROYECTO SONAR ULTRASONICO", WHITE, BLACK, MEDIUM);
+						drawString(20, 72, "Ana Belen Bartolome", WHITE, BLACK, MEDIUM);
+						drawString(20, 92, "Cesar Murciego", WHITE, BLACK, MEDIUM);
+				
+						drawString(30, 125, "Elija una opcion:", WHITE, BLACK, MEDIUM);
+						drawString(30, 155, "1) Disparo unico:", WHITE, BLACK, MEDIUM);
+						drawString(70, 175, "-> KEY 1", WHITE, BLACK, MEDIUM);
+						drawString(30, 195, "2) Disparos continuos:", WHITE, BLACK, MEDIUM);
+						drawString(70, 215, "-> KEY 2", WHITE, BLACK, MEDIUM);
+						set_servo(grados = 90);	 // Inicializamos servo a la posicion 90º
+					}
+					
+					if(FLAG_KEY1 == 1)	// Se ha pulsado KEY1 (único)
+					{
+						FLAG_KEY1   = 0;			  		// Borramos flag de KEY1	
+						mode        = OFFLINE_M_U;			// Modo disparo unico seleccionado
+						FLAG_MENU = 0; 		  				// Permitimos que aparezca el siguiente menu 
+					}
+					
+					if(FLAG_KEY2 == 1)  // Se ha pulsado KEY2 (continuo)
+					{
+						FLAG_KEY2   = 0;			  		// Borramos flag de KEY2
+						mode        = OFFLINE_M_C;	// Modo disparos continuos seleccionado
+						FLAG_MENU = 0; 			  			// Permitimos que aparezca el siguiente menu 
+					}
+			break;
+			
+			case OFFLINE_M_U:	// Modo manual - medida unica (offline)
+				if(FLAG_MENU == 0)
+				{
+					FLAG_MENU = 1;
+					fillScreen(BLACK);
+
+					drawString(30, 10, "Elija una opcion:", WHITE, BLACK, SMALL);
+					drawString(30, 20, "1) Servo: -10 grados", WHITE, BLACK, SMALL);
+					drawString(70, 30, "-> KEY 1", WHITE, BLACK, SMALL);
+					drawString(30, 40, "2) Servo: +10 grados", WHITE, BLACK, SMALL);
+					drawString(70, 50, "-> KEY 2", WHITE, BLACK, SMALL);
+					drawString(30, 60, "3) Disparo ultrasonidos:", WHITE, BLACK, SMALL);	
+					drawString(70, 70, "-> ISP", WHITE, BLACK, SMALL);
+					FLAG_EINT0_PULSO = 1;
+					FLAG_EINT_SERVO  = 1;
+					FLAG_OFFLINE = 1;
+				}
+				if(FLAG_init_timer == 0)
+				{
+					LPC_TIM0->TCR   |= (1<<0);			// Habilitamos timer 0
+					LPC_TIM3->TCR        = 0x01;    // Enable Timer 3
+					FLAG_init_timer  =  1;					// Timer 0 inicializado
+				}
 				
 				
+			
+				
+			break;
+			
+			case OFFLINE_M_C: // Modo manual - medidas continuas (offline)
+				if(FLAG_MENU ==0)
+				{
+					FLAG_MENU = 1;
+					fillScreen(BLACK);
+					drawString(30, 10, "Elija una opcion:", WHITE, BLACK, SMALL);
+					drawString(30, 20, "1) Servo: -10 grados", WHITE, BLACK, SMALL);
+					drawString(70, 30, "-> KEY 1", WHITE, BLACK, SMALL);
+					drawString(30, 40, "2) Servo: +10 grados", WHITE, BLACK, SMALL);
+					drawString(70, 50, "-> KEY 2", WHITE, BLACK, SMALL);
+					drawString(30, 60, "3) Disparo ultrasonidos:", WHITE, BLACK, SMALL);	
+					drawString(70, 70, "-> ISP", WHITE, BLACK, SMALL);
+					FLAG_EINT_SERVO  = 1;
+					FLAG_OFFLINE = 1;
+				}
+				if(FLAG_init_timer == 0)
+				{
+					LPC_TIM0->TCR   |= (1<<0);			// Habilitamos timer 0
+					LPC_TIM3->TCR        = 0x01;    // Enable Timer 3
+					FLAG_init_timer  =  1;					// Timer 0 inicializado
+				}
+				
+				if(FLAG_ISP)
+					FLAG_DISPARO_CONTINUO = 1;
+				
+			break;
+			
+			case OFFLINE_A:	// Modo Automatico (offline)
+				if(FLAG_MENU==0)
+				{
+					FLAG_MENU = 1;
+			
+					fillScreen(BLACK);
+					drawString(100,22, "UAH-SED", BLACK, WHITE, MEDIUM);
+					drawString(20, 52, "PROYECTO SONAR ULTRASONICO", WHITE, BLACK, MEDIUM);
+					drawString(20, 72, "Ana Belen Bartolome", WHITE, BLACK, MEDIUM);
+					drawString(20, 92, "Cesar Murciego", WHITE, BLACK, MEDIUM);
+					set_servo(grados = 0);
+					FLAG_OFFLINE = 1;
+					FLAG_AUTO 	 = 1;
+				}
+				if(FLAG_init_timer == 0)
+				{
+					LPC_TIM0->TCR   |= (1<<0);				// Habilitamos timer 0
+					LPC_TIM3->TCR        = 0x01;      // Enable Timer	3		
+					FLAG_init_timer  =  1;						// Timer 0 inicializado
+				}
+			break;	
+					
 				
 			case ONLINE:
 				fillScreen(BLACK);
@@ -211,95 +321,7 @@ int main()
 				FLAG_ONLINE = 1;
 			break;
 
-			case OFFLINE_M:	// Modo manual (offline)
-				
-				if(FLAG_MENU == 0)
-				{
-					FLAG_MENU = 1; 	
-					fillScreen(BLACK);
-					drawString(100,22, "UAH-SED", BLACK, WHITE, MEDIUM);
-					drawString(20, 52, "PROYECTO SONAR ULTRASONICO", WHITE, BLACK, MEDIUM);
-					drawString(20, 72, "Ana Belen Bartolome", WHITE, BLACK, MEDIUM);
-					drawString(20, 92, "Cesar Murciego", WHITE, BLACK, MEDIUM);
 			
-					drawString(30, 125, "Elija una opcion:", WHITE, BLACK, MEDIUM);
-					drawString(30, 155, "1) Disparo unico:", WHITE, BLACK, MEDIUM);
-					drawString(70, 175, "-> KEY 1", WHITE, BLACK, MEDIUM);
-					drawString(30, 195, "2) Disparos continuos:", WHITE, BLACK, MEDIUM);
-					drawString(70, 215, "-> KEY 2", WHITE, BLACK, MEDIUM);
-					set_servo(grados = 90);	 // Inicializamos servo a la posicion 90º
-				}
-				
-				if(FLAG_KEY1 == 1)	// Se ha pulsado KEY1 (único)
-				{
-					FLAG_KEY1   = 0;			  		// Borramos flag de KEY1	
-					mode        = OFFLINE_M_U;			// Modo disparo unico seleccionado
-					FLAG_MENU = 0; 		  				// Permitimos que aparezca el siguiente menu 
-				}
-				
-				if(FLAG_KEY2 == 1)  // Se ha pulsado KEY2 (continuo)
-				{
-					FLAG_KEY2   = 0;			  		// Borramos flag de KEY2
-					mode        = OFFLINE_M_C;	// Modo disparos continuos seleccionado
-					FLAG_MENU = 0; 			  			// Permitimos que aparezca el siguiente menu 
-				}
-		break;
-		
-		case OFFLINE_M_U:	// Modo manual - medida unica (offline)
-			if(FLAG_MENU == 0)
-			{
-				FLAG_MENU = 1;
-				fillScreen(BLACK);
-
-				drawString(30, 10, "Elija una opcion:", WHITE, BLACK, SMALL);
-				drawString(30, 20, "1) Servo: -10 grados", WHITE, BLACK, SMALL);
-				drawString(70, 30, "-> KEY 1", WHITE, BLACK, SMALL);
-				drawString(30, 40, "2) Servo: +10 grados", WHITE, BLACK, SMALL);
-				drawString(70, 50, "-> KEY 2", WHITE, BLACK, SMALL);
-				drawString(30, 60, "3) Disparo ultrasonidos:", WHITE, BLACK, SMALL);	
-				drawString(70, 70, "-> ISP", WHITE, BLACK, SMALL);
-				FLAG_EINT0_PULSO = 1;
-				FLAG_EINT_SERVO  = 1;
-				FLAG_OFFLINE = 1;
-			}
-		  if(FLAG_init_timer == 0)
-			{
-				LPC_TIM0->TCR   |= (1<<0);			// Habilitamos timer 0
-				LPC_TIM3->TCR        = 0x01;    // Enable Timer 3
-				FLAG_init_timer  =  1;					// Timer 0 inicializado
-			}
-			
-			
-		
-			
-		break;
-		
-		case OFFLINE_M_C: // Modo manual - medidas continuas (offline)
-			if(FLAG_MENU ==0)
-			{
-				FLAG_MENU = 1;
-				fillScreen(BLACK);
-				drawString(30, 10, "Elija una opcion:", WHITE, BLACK, SMALL);
-				drawString(30, 20, "1) Servo: -10 grados", WHITE, BLACK, SMALL);
-				drawString(70, 30, "-> KEY 1", WHITE, BLACK, SMALL);
-				drawString(30, 40, "2) Servo: +10 grados", WHITE, BLACK, SMALL);
-				drawString(70, 50, "-> KEY 2", WHITE, BLACK, SMALL);
-				drawString(30, 60, "3) Disparo ultrasonidos:", WHITE, BLACK, SMALL);	
-				drawString(70, 70, "-> ISP", WHITE, BLACK, SMALL);
-				FLAG_EINT_SERVO  = 1;
-				FLAG_OFFLINE = 1;
-			}
-			if(FLAG_init_timer == 0)
-			{
-				LPC_TIM0->TCR   |= (1<<0);			// Habilitamos timer 0
-				LPC_TIM3->TCR        = 0x01;    // Enable Timer 3
-				FLAG_init_timer  =  1;					// Timer 0 inicializado
-			}
-			
-			if(FLAG_ISP)
-				FLAG_DISPARO_CONTINUO = 1;
-			
-		break;
 			
 			case ONLINE_M:
 				
@@ -389,7 +411,7 @@ int main()
 				{
 					if(grados<180)
 						set_servo(grados+=10);
-	
+
 				}
 				else if(strcmp (buffer, "-\r") == 0) 
 				{
@@ -407,6 +429,19 @@ int main()
 
 			}
 			
+		break;
+			
+		case ONLINE_A:	// Modo Automatico (online)
+			
+			if(FLAG_init_timer == 0)
+			{
+				LPC_TIM0->TCR   |= (1<<0);				// Habilitamos timer 0
+				LPC_TIM3->TCR        = 0x01;      // Enable Timer	3		
+				FLAG_init_timer  =  1;						// Timer 0 inicializado
+				set_servo(grados = 0);
+				FLAG_ONLINE = 1;
+				FLAG_AUTO 	 = 1;
+			}
 		break;
 
 		
