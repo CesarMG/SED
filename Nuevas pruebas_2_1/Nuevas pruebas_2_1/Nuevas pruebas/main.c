@@ -55,14 +55,10 @@ char linea2[100];
 char linea3[100];
 char linea4[100];
 
-char buffer[200]; // Buffer de recepción de 200 caracteres
-char buffer_dist[100];
-char buffer_temp_glob[100];
-char buffer_temp_I2C[100];
-char buffer_grad[100];
-char buffer_umbral[100];
+char buffer[30]; // Buffer de recepción de 200 caracteres
+
 char *ptr_rx; // Puntero de recepción
-volatile int rx_completa; // Flag de recepción de cadena que se activa a "1" al recibir la tecla return CR(ASCII=13)
+char rx_completa; // Flag de recepción de cadena que se activa a "1" al recibir la tecla return CR(ASCII=13)
 char *ptr_tx; // puntero de transmisión
 char tx_completa; // Flag de transmisión de cadena que se activa al transmitir el caracter null (fin de cadena)	
 char aux = 0;

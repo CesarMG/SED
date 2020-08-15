@@ -11,4 +11,5 @@
 .\main.o: H:\Programas\Keil\ARM\ARMCC\bin\..\include\Math.h
 .\main.o: configuraciones.h
 .\main.o: funciones.h
+.\main.o: uart.h
 .\main.o: interrupciones.h
