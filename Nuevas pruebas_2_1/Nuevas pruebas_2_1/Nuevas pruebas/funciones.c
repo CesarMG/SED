@@ -85,15 +85,15 @@ void mostrar_medidas_uart()			//COLOCAR EN EL IRQ DEL TIMER 0 (del que interrump
 {
 	char buff[50];
 	
-	sprintf(buff, "\n Temperatura LM35 : %3.2f grados ", temperatura_global);
+	sprintf(buff, "\n Temperatura LM35 : %d grados ", (int)temperatura_global);
 	tx_cadena_UART0(buff);
 	while(tx_completa == 0);
 	
-	sprintf(buff, "\n Temperatura I2C : %3.2f grados ", temperaturaI2C);
+	sprintf(buff, "\n Temperatura I2C : %d grados ",(int) temperaturaI2C);
 	tx_cadena_UART0(buff);
 	while(tx_completa == 0);
 	
-	sprintf(buff, "\n Distancia : %3.2f grados", distancia);
+	sprintf(buff, "\n Distancia : %d cm  \n", (int)distancia);
 	tx_cadena_UART0(buff);
 	while(tx_completa == 0);
 	//tx_completa = 0;

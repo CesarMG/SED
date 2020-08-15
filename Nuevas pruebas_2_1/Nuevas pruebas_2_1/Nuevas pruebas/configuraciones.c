@@ -9,7 +9,7 @@
 void config_prioridades()
 {
 	NVIC_SetPriorityGrouping(0);
-	NVIC_SetPriority(ADC_IRQn,  5);
+	NVIC_SetPriority(ADC_IRQn,   5);
 	NVIC_SetPriority(UART0_IRQn, 0);
 	NVIC_SetPriority(EINT0_IRQn, 0);		// Asignamos prioridades a las interrupciones
 	NVIC_SetPriority(EINT1_IRQn, 0);

@@ -827,3 +827,63 @@ Load "C:\\Users\\Cesar\\OneDrive\\Documentos\\Escritorio\\Nuevas pruebas_2_2_2\\
 Erase Done.
 Programming Done.
 Verify OK.
+Build target 'miniDK2'
+compiling funciones.c...
+funciones.c(35): warning:  #223-D: function "I2CSendAddr" declared implicitly
+funciones.c(36): warning:  #223-D: function "I2CSendByte" declared implicitly
+funciones.c(37): warning:  #223-D: function "I2CSendStop" declared implicitly
+funciones.c(43): warning:  #223-D: function "I2CGetByte" declared implicitly
+funciones.c(88): warning:  #181-D: argument is incompatible with corresponding format string conversion
+funciones.c(92): warning:  #181-D: argument is incompatible with corresponding format string conversion
+funciones.c(96): warning:  #181-D: argument is incompatible with corresponding format string conversion
+linking...
+Program Size: Code=21140 RO-data=8116 RW-data=96 ZI-data=704  
+".\nuevas_pruebas.axf" - 0 Errors, 7 Warning(s).
+Build target 'miniDK2'
+compiling funciones.c...
+funciones.c(35): warning:  #223-D: function "I2CSendAddr" declared implicitly
+funciones.c(36): warning:  #223-D: function "I2CSendByte" declared implicitly
+funciones.c(37): warning:  #223-D: function "I2CSendStop" declared implicitly
+funciones.c(43): warning:  #223-D: function "I2CGetByte" declared implicitly
+linking...
+Program Size: Code=21188 RO-data=8116 RW-data=96 ZI-data=704  
+".\nuevas_pruebas.axf" - 0 Errors, 4 Warning(s).
+Load "C:\\Users\\Cesar\\OneDrive\\Documentos\\Escritorio\\Nuevas pruebas_2_2_2\\SED\\Nuevas pruebas_2_1\\Nuevas pruebas_2_1\\Nuevas pruebas\\nuevas_pruebas.axf" 
+Erase Done.
+Programming Done.
+Verify OK.
+Build target 'miniDK2'
+compiling funciones.c...
+funciones.c(35): warning:  #223-D: function "I2CSendAddr" declared implicitly
+funciones.c(36): warning:  #223-D: function "I2CSendByte" declared implicitly
+funciones.c(37): warning:  #223-D: function "I2CSendStop" declared implicitly
+funciones.c(43): warning:  #223-D: function "I2CGetByte" declared implicitly
+linking...
+Program Size: Code=21184 RO-data=8120 RW-data=96 ZI-data=704  
+".\nuevas_pruebas.axf" - 0 Errors, 4 Warning(s).
+Build target 'miniDK2'
+compiling configuraciones.c...
+configuraciones.c(96): warning:  #223-D: function "I2CSendAddr" declared implicitly
+configuraciones.c(97): warning:  #223-D: function "I2CSendByte" declared implicitly
+configuraciones.c(99): warning:  #223-D: function "I2CSendStop" declared implicitly
+configuraciones.c(101): warning:  #223-D: function "I2Cdelay" declared implicitly
+linking...
+Program Size: Code=21184 RO-data=8120 RW-data=96 ZI-data=704  
+".\nuevas_pruebas.axf" - 0 Errors, 4 Warning(s).
+Load "C:\\Users\\Cesar\\OneDrive\\Documentos\\Escritorio\\Nuevas pruebas_2_2_2\\SED\\Nuevas pruebas_2_1\\Nuevas pruebas_2_1\\Nuevas pruebas\\nuevas_pruebas.axf" 
+Erase Done.
+Programming Done.
+Verify OK.
+Build target 'miniDK2'
+compiling configuraciones.c...
+configuraciones.c(96): warning:  #223-D: function "I2CSendAddr" declared implicitly
+configuraciones.c(97): warning:  #223-D: function "I2CSendByte" declared implicitly
+configuraciones.c(99): warning:  #223-D: function "I2CSendStop" declared implicitly
+configuraciones.c(101): warning:  #223-D: function "I2Cdelay" declared implicitly
+linking...
+Program Size: Code=21184 RO-data=8120 RW-data=96 ZI-data=704  
+".\nuevas_pruebas.axf" - 0 Errors, 4 Warning(s).
+Load "C:\\Users\\Cesar\\OneDrive\\Documentos\\Escritorio\\Nuevas pruebas_2_2_2\\SED\\Nuevas pruebas_2_1\\Nuevas pruebas_2_1\\Nuevas pruebas\\nuevas_pruebas.axf" 
+Erase Done.
+Programming Done.
+Verify OK.
