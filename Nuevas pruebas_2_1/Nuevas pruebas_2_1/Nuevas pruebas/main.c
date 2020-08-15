@@ -371,8 +371,7 @@ int main()
 						else 
 							tx_cadena_UART0("\n\rOpcion seleccionada incorrecta\n\r");
 						rx_completa = 0;
-					}
-								
+					}				
 				} while (mode == ONLINE_M);
 				FLAG_MENU = 0;
 			break;
@@ -392,27 +391,6 @@ int main()
 					while(tx_completa == 0);
 					FLAG_MENU = 1;
 				}
-				
-				if(rx_completa == 1)
-				{
-				
-					if(strcmp (buffer, "+\r") == 0) 
-					{
-						if(grados<180)
-							set_servo(grados+=10);
-					} 
-					else if(strcmp (buffer, "-\r") == 0) 
-					{
-						if(grados<180)
-							set_servo(grados-=10);
-					}  
-					else if(strcmp (buffer, "S\r") == 0)
-						generar_pulso_alto();
-
-					else 
-						tx_cadena_UART0("\n\rOpcion seleccionada incorrecta\n\r");
-					rx_completa = 0;
-				}
 			break;
 			
 			case ONLINE_M_C: // Modo manual - medidas continuas (online)
@@ -430,30 +408,6 @@ int main()
 					FLAG_MENU=1;
 				}
 					
-					
-				if(rx_completa == 1)
-				{
-					if(strcmp (buffer, "+\r") == 0) 
-					{
-						if(grados<180)
-							set_servo(grados+=10);
-
-					}
-					else if(strcmp (buffer, "-\r") == 0) 
-					{
-						if(grados>0)
-							set_servo(grados-=10);
-					}  
-					else if(strcmp (buffer, "S\r") == 0)
-					{
-						FLAG_DISPARO_CONTINUO = 1;
-					}		
-					else 
-					{
-						tx_cadena_UART0("\n\rOpcion seleccionada incorrecta\n\r");
-					}
-
-				}
 				
 			break;
 			
@@ -465,7 +419,7 @@ int main()
 					LPC_TIM3->TCR        = 0x01;      // Enable Timer	3		
 					FLAG_init_timer  =  1;						// Timer 0 inicializado
 					set_servo(grados = 0);
-					FLAG_ONLINE = 1;
+					FLAG_ONLINE  = 1;
 					FLAG_AUTO 	 = 1;
 				}
 			break;

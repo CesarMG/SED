@@ -28,11 +28,13 @@ extern char *ptr_rx;	// puntero de recepción
 extern char rx_completa;// Flag de recepción de cadena completa que se activa al recibir CR(0x0D)
 extern char *ptr_tx;			// puntero de transmisión
 extern char tx_completa;		// Flag de transmisión de cadena completa
-extern uint8_t FLAG_DETEC;
+extern uint8_t FLAG_ONLINE;
 extern void uart0_init(int baudrate);
 extern void tx_cadena_UART0(char *ptr);
 extern char buffer_umbral[30] ;
 
+
+extern uint8_t FLAG_DISPARO_CONTINUO;
 extern uint8_t grados;
 extern char aux4;
 extern int  aux5;

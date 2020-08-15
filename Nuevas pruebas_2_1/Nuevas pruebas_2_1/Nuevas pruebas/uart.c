@@ -11,6 +11,8 @@
 #include "uart.h"
 #include <string.h>
 #include <stdlib.h>
+#define ONLINE_M_U  	211
+#define ONLINE_M_C  	212
 
 void analizo_detec()
 {
@@ -27,8 +29,15 @@ void analizo_detec()
 	{
 		if((grados-r_servo)>=0)
 			set_servo(grados-=r_servo);
-	}  
-	
+	}
+	else if(strcmp (buffer, "S\r") == 0)
+	{
+		if(mode == ONLINE_M_U)
+			generar_pulso_alto();
+		if(mode == ONLINE_M_C)
+			FLAG_DISPARO_CONTINUO = 1;
+
+	}
 	else if(buffer[0] == 'R') 
 	{
 		while(buffer[paso] != 13)
@@ -98,7 +107,7 @@ void UART0_IRQHandler(void) {
 							*ptr_rx=0;		/* Añadimos el caracter null para tratar los datos recibidos como una cadena*/ 
 							rx_completa = 1;/* rx completa */
 							ptr_rx=buffer;	/* puntero al inicio del buffer para nueva recepción */
-	    				if(FLAG_DETEC)
+	    				if(FLAG_ONLINE)
 								analizo_detec();
 							}	
 		break;

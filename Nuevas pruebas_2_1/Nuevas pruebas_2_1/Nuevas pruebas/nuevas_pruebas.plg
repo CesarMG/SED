@@ -1379,3 +1379,44 @@ Load "C:\\Users\\Cesar\\OneDrive\\Documentos\\Escritorio\\Nuevas pruebas_2_2_2\\
 Erase Done.
 Programming Done.
 Verify OK.
+Build target 'miniDK2'
+compiling main.c...
+compiling funciones.c...
+funciones.c(35): warning:  #223-D: function "I2CSendAddr" declared implicitly
+funciones.c(36): warning:  #223-D: function "I2CSendByte" declared implicitly
+funciones.c(37): warning:  #223-D: function "I2CSendStop" declared implicitly
+funciones.c(43): warning:  #223-D: function "I2CGetByte" declared implicitly
+compiling interrupciones.c...
+compiling uart.c...
+linking...
+Program Size: Code=22652 RO-data=8540 RW-data=104 ZI-data=736  
+".\nuevas_pruebas.axf" - 0 Errors, 4 Warning(s).
+Load "C:\\Users\\Cesar\\OneDrive\\Documentos\\Escritorio\\Nuevas pruebas_2_2_2\\SED\\Nuevas pruebas_2_1\\Nuevas pruebas_2_1\\Nuevas pruebas\\nuevas_pruebas.axf" 
+Erase Done.
+Programming Done.
+Verify OK.
+Build target 'miniDK2'
+compiling uart.c...
+linking...
+Program Size: Code=22652 RO-data=8540 RW-data=104 ZI-data=736  
+".\nuevas_pruebas.axf" - 0 Errors, 0 Warning(s).
+Load "C:\\Users\\Cesar\\OneDrive\\Documentos\\Escritorio\\Nuevas pruebas_2_2_2\\SED\\Nuevas pruebas_2_1\\Nuevas pruebas_2_1\\Nuevas pruebas\\nuevas_pruebas.axf" 
+Erase Done.
+Programming Done.
+Verify OK.
+Build target 'miniDK2'
+compiling main.c...
+compiling funciones.c...
+funciones.c(35): warning:  #223-D: function "I2CSendAddr" declared implicitly
+funciones.c(36): warning:  #223-D: function "I2CSendByte" declared implicitly
+funciones.c(37): warning:  #223-D: function "I2CSendStop" declared implicitly
+funciones.c(43): warning:  #223-D: function "I2CGetByte" declared implicitly
+compiling interrupciones.c...
+compiling uart.c...
+linking...
+Program Size: Code=22652 RO-data=8540 RW-data=104 ZI-data=736  
+".\nuevas_pruebas.axf" - 0 Errors, 4 Warning(s).
+Load "C:\\Users\\Cesar\\OneDrive\\Documentos\\Escritorio\\Nuevas pruebas_2_2_2\\SED\\Nuevas pruebas_2_1\\Nuevas pruebas_2_1\\Nuevas pruebas\\nuevas_pruebas.axf" 
+Erase Done.
+Programming Done.
+Verify OK.
