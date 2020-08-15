@@ -15,19 +15,42 @@
 void analizo_detec()
 {
 	int paso = 0;
-	int n_umbral = 0;
+	int n_umbral = 0, n_r_servo = 10;
+	static int r_servo = 10;
 	if(strcmp (buffer, "+\r") == 0) 
 	{
-		if(grados<180)
-		set_servo(grados+=10);						
+		if((grados+r_servo) <= 180)
+			set_servo(grados+=r_servo);						
 					
 	} 
 	else if(strcmp (buffer, "-\r") == 0) 
 	{
-		if(grados>0)
-			set_servo(grados-=10);
+		if((grados-r_servo)>=0)
+			set_servo(grados-=r_servo);
 	}  
+	
+	else if(buffer[0] == 'R') 
+	{
+		while(buffer[paso] != 13)
+		{
+			buffer[paso] = buffer[paso + 1];
+			paso++;
+		}
+		n_r_servo = atoi(buffer);
 		
+		if((n_r_servo<=90)&&(n_r_servo>=5))
+		{	
+			r_servo = n_r_servo;
+			sprintf(buffer_umbral, "OK");
+			tx_cadena_UART0(buffer_umbral);
+		}		
+		else
+		{
+			sprintf(buffer_umbral, "MAL");
+			tx_cadena_UART0(buffer_umbral);
+	
+		} 
+	}
 	else if(buffer[0] == 'U') 
 	{
 		

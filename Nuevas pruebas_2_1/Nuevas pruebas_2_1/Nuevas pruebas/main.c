@@ -315,26 +315,6 @@ int main()
 				
 	
 			break;
-			case ONLINE_D:	// Modo Deteccion obstaculos (online)
-
-		
-	
-				if(FLAG_init_timer == 0)
-				{
-					LPC_TIM0->TCR   |= (1<<0);				// Habilitamos timer 0
-					LPC_TIM3->TCR    = 0x01;          // Enable Timer 3
-					FLAG_init_timer  =  1;						// Timer 0 inicializado
-					set_servo(grados = 90);	 // Inicializamos servo a la posicion 90º
-					tx_cadena_UART0("Introduce: \n 1. Mover el servo a la derecha -> + \n 2. Mover el servo hacia la izquierda -> - \n 3. Disparar -> S \n 4. Establecer nuevo umbral -> U \n\r");
-					while(tx_completa==0);
-					//FLAG_ONLINE 	= 1;
-					FLAG_DETEC		= 1;
-				}
-				
-			
-				
-				
-		break;
 				
 			case ONLINE:
 				fillScreen(BLACK);
@@ -491,7 +471,24 @@ int main()
 			break;
 			
 			
+			
+			case ONLINE_D:	// Modo Deteccion obstaculos (online)
 
+		
+	
+				if(FLAG_init_timer == 0)
+				{
+					LPC_TIM0->TCR   |= (1<<0);				// Habilitamos timer 0
+					LPC_TIM3->TCR    = 0x01;          // Enable Timer 3
+					FLAG_init_timer  =  1;						// Timer 0 inicializado
+					set_servo(grados = 90);	 // Inicializamos servo a la posicion 90º
+					tx_cadena_UART0("Introduce: \n 1. Mover el servo a la derecha -> + \n 2. Mover el servo hacia la izquierda -> - \n 3. Disparar -> S \n 4. Establecer nuevo umbral -> U \n\r");
+					while(tx_completa==0);
+					//FLAG_ONLINE 	= 1;
+					FLAG_DETEC		= 1;
+				}
+				
+			break;
 			
 		
 
