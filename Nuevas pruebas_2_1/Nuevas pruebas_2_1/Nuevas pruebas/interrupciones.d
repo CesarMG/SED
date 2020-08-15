@@ -1,0 +1,10 @@
+.\interrupciones.o: interrupciones.c
+.\interrupciones.o: interrupciones.h
+.\interrupciones.o: H:\Programas\Keil\ARM\Inc\NXP\LPC17xx\LPC17xx.H
+.\interrupciones.o: H:\Programas\Keil\ARM\CMSIS\Include\core_cm3.h
+.\interrupciones.o: H:\Programas\Keil\ARM\ARMCC\bin\..\include\stdint.h
+.\interrupciones.o: H:\Programas\Keil\ARM\CMSIS\Include\core_cmInstr.h
+.\interrupciones.o: H:\Programas\Keil\ARM\CMSIS\Include\core_cmFunc.h
+.\interrupciones.o: H:\Programas\Keil\ARM\Inc\NXP\LPC17xx\system_LPC17xx.h
+.\interrupciones.o: lcddriver.h
+.\interrupciones.o: H:\Programas\Keil\ARM\ARMCC\bin\..\include\stdio.h

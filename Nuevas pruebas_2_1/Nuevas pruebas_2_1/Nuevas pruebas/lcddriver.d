@@ -1,0 +1,11 @@
+.\lcddriver.o: lcddriver.c
+.\lcddriver.o: lcddriver.h
+.\lcddriver.o: H:\Programas\Keil\ARM\ARMCC\bin\..\include\stdint.h
+.\lcddriver.o: lpc17xx_gpio.h
+.\lcddriver.o: H:\Programas\Keil\ARM\Inc\NXP\LPC17xx\LPC17xx.h
+.\lcddriver.o: H:\Programas\Keil\ARM\CMSIS\Include\core_cm3.h
+.\lcddriver.o: H:\Programas\Keil\ARM\CMSIS\Include\core_cmInstr.h
+.\lcddriver.o: H:\Programas\Keil\ARM\CMSIS\Include\core_cmFunc.h
+.\lcddriver.o: H:\Programas\Keil\ARM\Inc\NXP\LPC17xx\system_LPC17xx.h
+.\lcddriver.o: lpc_types.h
+.\lcddriver.o: lpc17xx_clkpwr.h

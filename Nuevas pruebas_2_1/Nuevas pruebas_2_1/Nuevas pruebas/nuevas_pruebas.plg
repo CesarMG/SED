@@ -1,0 +1,105 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Project:</h2>
+C:\Users\Cesar\OneDrive\Documentos\Escritorio\Nuevas pruebas_2_2_2\SED\Nuevas pruebas_2_1\Nuevas pruebas_2_1\Nuevas pruebas\nuevas_pruebas.uvproj
+Project File Date:  08/12/2020
+
+<h2>Output:</h2>
+Load "C:\\Users\\Cesar\\OneDrive\\Documentos\\Escritorio\\Nuevas pruebas_2_2_2\\SED\\Nuevas pruebas_2_1\\Nuevas pruebas_2_1\\Nuevas pruebas\\nuevas_pruebas.axf" 
+Erase Done.
+Programming Done.
+Verify OK.
+Rebuild target 'miniDK2'
+assembling startup_LPC17xx.s...
+compiling system_LPC17xx.c...
+compiling main.c...
+main.c(95): warning:  #223-D: function "uart0_init" declared implicitly
+main.c(403): warning:  #223-D: function "tx_cadena_UART0" declared implicitly
+main.c(406): warning:  #223-D: function "strcmp" declared implicitly
+main.c(516): warning:  #223-D: function "tx_cadena_UART0" declared implicitly
+main.c(519): warning:  #223-D: function "strcmp" declared implicitly
+main.c(547): warning:  #223-D: function "tx_cadena_UART0" declared implicitly
+main.c(554): warning:  #223-D: function "strcmp" declared implicitly
+main.c(580): warning:  #223-D: function "tx_cadena_UART0" declared implicitly
+main.c(606): warning:  #223-D: function "tx_cadena_UART0" declared implicitly
+main.c(611): warning:  #223-D: function "strcmp" declared implicitly
+main.c(640): warning:  #223-D: function "tx_cadena_UART0" declared implicitly
+main.c(681): warning:  #223-D: function "tx_cadena_UART0" declared implicitly
+main.c(688): warning:  #223-D: function "strcmp" declared implicitly
+main.c(708): warning:  #223-D: function "tx_cadena_UART0" declared implicitly
+main.c(742): warning:  #223-D: function "tx_cadena_UART0" declared implicitly
+compiling i2c_lpc17xx.c...
+compiling configuraciones.c...
+configuraciones.c(72): warning:  #223-D: function "I2CSendAddr" declared implicitly
+configuraciones.c(73): warning:  #223-D: function "I2CSendByte" declared implicitly
+configuraciones.c(75): warning:  #223-D: function "I2CSendStop" declared implicitly
+configuraciones.c(77): warning:  #223-D: function "I2Cdelay" declared implicitly
+compiling funciones.c...
+funciones.c(35): warning:  #223-D: function "I2CSendAddr" declared implicitly
+funciones.c(36): warning:  #223-D: function "I2CSendByte" declared implicitly
+funciones.c(37): warning:  #223-D: function "I2CSendStop" declared implicitly
+funciones.c(43): warning:  #223-D: function "I2CGetByte" declared implicitly
+compiling interrupciones.c...
+interrupciones.c(200): warning:  #1-D: last line of file ends without a newline
+compiling uart.c...
+compiling font.c...
+compiling lcddriver.c...
+compiling lpc17xx_clkpwr.c...
+compiling lpc17xx_gpio.c...
+linking...
+Program Size: Code=23400 RO-data=8544 RW-data=108 ZI-data=1772  
+".\nuevas_pruebas.axf" - 0 Errors, 24 Warning(s).
+Load "C:\\Users\\Cesar\\OneDrive\\Documentos\\Escritorio\\Nuevas pruebas_2_2_2\\SED\\Nuevas pruebas_2_1\\Nuevas pruebas_2_1\\Nuevas pruebas\\nuevas_pruebas.axf" 
+Erase Done.
+Programming Done.
+Verify OK.
+Build target 'miniDK2'
+compiling main.c...
+main.c(95): warning:  #223-D: function "uart0_init" declared implicitly
+main.c(403): warning:  #223-D: function "tx_cadena_UART0" declared implicitly
+main.c(406): warning:  #223-D: function "strcmp" declared implicitly
+main.c(516): warning:  #223-D: function "tx_cadena_UART0" declared implicitly
+main.c(519): warning:  #223-D: function "strcmp" declared implicitly
+main.c(547): warning:  #223-D: function "tx_cadena_UART0" declared implicitly
+main.c(554): warning:  #223-D: function "strcmp" declared implicitly
+main.c(580): warning:  #223-D: function "tx_cadena_UART0" declared implicitly
+main.c(606): warning:  #223-D: function "tx_cadena_UART0" declared implicitly
+main.c(611): warning:  #223-D: function "strcmp" declared implicitly
+main.c(640): warning:  #223-D: function "tx_cadena_UART0" declared implicitly
+main.c(681): warning:  #223-D: function "tx_cadena_UART0" declared implicitly
+main.c(688): warning:  #223-D: function "strcmp" declared implicitly
+main.c(708): warning:  #223-D: function "tx_cadena_UART0" declared implicitly
+main.c(742): warning:  #223-D: function "tx_cadena_UART0" declared implicitly
+linking...
+Program Size: Code=23308 RO-data=8540 RW-data=108 ZI-data=1772  
+".\nuevas_pruebas.axf" - 0 Errors, 15 Warning(s).
+Load "C:\\Users\\Cesar\\OneDrive\\Documentos\\Escritorio\\Nuevas pruebas_2_2_2\\SED\\Nuevas pruebas_2_1\\Nuevas pruebas_2_1\\Nuevas pruebas\\nuevas_pruebas.axf" 
+Erase Done.
+Programming Done.
+Verify OK.
+Build target 'miniDK2'
+compiling main.c...
+main.c(95): warning:  #223-D: function "uart0_init" declared implicitly
+main.c(403): warning:  #223-D: function "tx_cadena_UART0" declared implicitly
+main.c(406): warning:  #223-D: function "strcmp" declared implicitly
+main.c(516): warning:  #223-D: function "tx_cadena_UART0" declared implicitly
+main.c(519): warning:  #223-D: function "strcmp" declared implicitly
+main.c(547): warning:  #223-D: function "tx_cadena_UART0" declared implicitly
+main.c(554): warning:  #223-D: function "strcmp" declared implicitly
+main.c(580): warning:  #223-D: function "tx_cadena_UART0" declared implicitly
+main.c(606): warning:  #223-D: function "tx_cadena_UART0" declared implicitly
+main.c(611): warning:  #223-D: function "strcmp" declared implicitly
+main.c(640): warning:  #223-D: function "tx_cadena_UART0" declared implicitly
+main.c(681): warning:  #223-D: function "tx_cadena_UART0" declared implicitly
+main.c(688): warning:  #223-D: function "strcmp" declared implicitly
+main.c(703): warning:  #223-D: function "tx_cadena_UART0" declared implicitly
+main.c(737): warning:  #223-D: function "tx_cadena_UART0" declared implicitly
+linking...
+Program Size: Code=23300 RO-data=8540 RW-data=108 ZI-data=1772  
+".\nuevas_pruebas.axf" - 0 Errors, 15 Warning(s).
+Load "C:\\Users\\Cesar\\OneDrive\\Documentos\\Escritorio\\Nuevas pruebas_2_2_2\\SED\\Nuevas pruebas_2_1\\Nuevas pruebas_2_1\\Nuevas pruebas\\nuevas_pruebas.axf" 
+Erase Done.
+Programming Done.
+Verify OK.

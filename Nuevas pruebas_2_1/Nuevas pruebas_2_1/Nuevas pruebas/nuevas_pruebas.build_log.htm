@@ -1,0 +1,92 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Project:</h2>
+C:\Users\Anabelen\Desktop\PruebaProyecto\Nuevas pruebas_2_1\Nuevas pruebas_2_1\Nuevas pruebas\nuevas_pruebas.uvproj
+Project File Date:  08/12/2020
+
+<h2>Output:</h2>
+Rebuild target 'miniDK2'
+assembling startup_LPC17xx.s...
+compiling system_LPC17xx.c...
+compiling main.c...
+main.c(95): warning:  #223-D: function "uart0_init" declared implicitly
+        uart0_init(9600);
+main.c(403): warning:  #223-D: function "tx_cadena_UART0" declared implicitly
+                            tx_cadena_UART0("Introduce: \n 1. Modo manual \n 2. Modo automatico \n 3. Modo deteccion de obstaculos \n\r");
+main.c(406): warning:  #223-D: function "strcmp" declared implicitly
+                                        if(strcmp (buffer, "1\r") == 0)
+main.c(516): warning:  #223-D: function "tx_cadena_UART0" declared implicitly
+                                tx_cadena_UART0("Introduce: \n 1. Disparo unico \n 2. Disparos continuos \n\r");
+main.c(519): warning:  #223-D: function "strcmp" declared implicitly
+                                if(strcmp (buffer, "1\r") == 0) 
+main.c(547): warning:  #223-D: function "tx_cadena_UART0" declared implicitly
+                                        tx_cadena_UART0("Introduce: \n 1. Mover el servo a la derecha -> + \n 2. Mover el servo hacia la izquierda -> - \n 3. Disparar -> S \n\r");
+main.c(554): warning:  #223-D: function "strcmp" declared implicitly
+                                if(strcmp (buffer, "+\r") == 0) 
+main.c(580): warning:  #223-D: function "tx_cadena_UART0" declared implicitly
+                                        tx_cadena_UART0("\n\rOpcion seleccionada incorrecta\n\r");
+main.c(606): warning:  #223-D: function "tx_cadena_UART0" declared implicitly
+                                        tx_cadena_UART0("Introduce: \n 1. Mover el servo a la derecha -> + \n 2. Mover el servo hacia la izquierda -> - \n 3. Disparar -> S \n\r");
+main.c(611): warning:  #223-D: function "strcmp" declared implicitly
+                                if(strcmp (buffer, "+\r") == 0) 
+main.c(640): warning:  #223-D: function "tx_cadena_UART0" declared implicitly
+                                        tx_cadena_UART0("\n\rOpcion seleccionada incorrecta\n\r");
+main.c(669): warning:  #223-D: function "tx_cadena_UART0" declared implicitly
+                                tx_cadena_UART0("Introduce: \n 1. Mover el servo a la derecha -> + \n 2. Mover el servo hacia la izquierda -> - \n 3. Disparar -> S \n 4. Establecer nuevo umbral -> U \n\r");
+main.c(676): warning:  #223-D: function "strcmp" declared implicitly
+                        if(strcmp (buffer, "+\r") == 0) 
+main.c(696): warning:  #223-D: function "tx_cadena_UART0" declared implicitly
+                                tx_cadena_UART0("Introduzca el nuevo umbral, comprendido entre 0 y 300: \n\r"); 
+main.c(730): warning:  #223-D: function "tx_cadena_UART0" declared implicitly
+                                tx_cadena_UART0("\n\rOpcion seleccionada incorrecta\n\r");
+main.c: 15 warnings, 0 errors
+compiling i2c_lpc17xx.c...
+compiling configuraciones.c...
+configuraciones.c(72): warning:  #223-D: function "I2CSendAddr" declared implicitly
+                I2CSendAddr(0x48, 0);           // Direccion del dispositivo: 000
+configuraciones.c(73): warning:  #223-D: function "I2CSendByte" declared implicitly
+                I2CSendByte(0xAC);                      // Se accede al registro de configuracion
+configuraciones.c(75): warning:  #223-D: function "I2CSendStop" declared implicitly
+                I2CSendStop();                                  // Termino la comunicacion con un STOP
+configuraciones.c(77): warning:  #223-D: function "I2Cdelay" declared implicitly
+                I2Cdelay();                                                     // Retardo de 10s para asegurar la configuración con guardado en EEprom interna
+configuraciones.c: 4 warnings, 0 errors
+compiling funciones.c...
+funciones.c(35): warning:  #223-D: function "I2CSendAddr" declared implicitly
+                I2CSendAddr(0x48, 0);       // Inicio de la comunicación
+funciones.c(36): warning:  #223-D: function "I2CSendByte" declared implicitly
+      I2CSendByte(0xEE);          // Inicio de la conversión continua
+funciones.c(37): warning:  #223-D: function "I2CSendStop" declared implicitly
+      I2CSendStop();              // Fin de la comunicación     
+funciones.c(43): warning:  #223-D: function "I2CGetByte" declared implicitly
+                temp = I2CGetByte(0);
+funciones.c: 4 warnings, 0 errors
+compiling interrupciones.c...
+interrupciones.c(136): warning:  #223-D: function "sprintf" declared implicitly
+                        sprintf(linea2, "%.2f cm        "  ,    distancia);
+interrupciones.c(143): warning:  #223-D: function "sprintf" declared implicitly
+                        sprintf(linea1, "%d grados          ",    grados);
+interrupciones.c(200): warning:  #1-D: last line of file ends without a newline
+  //}
+interrupciones.c: 3 warnings, 0 errors
+compiling uart.c...
+compiling font.c...
+compiling lcddriver.c...
+compiling lpc17xx_clkpwr.c...
+compiling lpc17xx_gpio.c...
+linking...
+Program Size: Code=23344 RO-data=8544 RW-data=108 ZI-data=1772  
+".\nuevas_pruebas.axf" - 0 Error(s), 26 Warning(s).
+Load "C:\\Users\\Anabelen\\Desktop\\PruebaProyecto\\Nuevas pruebas_2_1\\Nuevas pruebas_2_1\\Nuevas pruebas\\nuevas_pruebas.axf" 
+Erase Done.
+Programming Done.
+Verify OK.
+</pre>
+</body>
+</html>
+ebaProyecto\\Nuevas pruebas_2_1\\Nuevas pruebas_2_1\\Nuevas pruebas\\nuevas_pruebas.axf" 
+_____^
+*** error 56: cannot open file
+Error: Flash Download failed  -  Could not load file 'C:\Users\Anabelen\Desktop\PruebaProyecto\Nuevas pruebas_2_1\Nuevas pruebas_2_1\Nuevas pruebas\nuevas_pruebas.axf'

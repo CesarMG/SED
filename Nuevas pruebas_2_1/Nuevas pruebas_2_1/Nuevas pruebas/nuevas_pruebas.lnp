@@ -1,0 +1,16 @@
+--cpu Cortex-M3
+".\startup_lpc17xx.o"
+".\system_lpc17xx.o"
+".\main.o"
+".\i2c_lpc17xx.o"
+".\configuraciones.o"
+".\funciones.o"
+".\interrupciones.o"
+".\uart.o"
+".\font.o"
+".\lcddriver.o"
+".\lpc17xx_clkpwr.o"
+".\lpc17xx_gpio.o"
+--ro-base 0x00000000 --entry 0x00000000 --rw-base 0x10000000 --entry Reset_Handler --first __Vectors --strict --summary_stderr --info summarysizes --map --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list ".\nuevas_pruebas.map" -o .\nuevas_pruebas.axf

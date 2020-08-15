@@ -1,0 +1,14 @@
+.\main.o: main.c
+.\main.o: H:\Programas\Keil\ARM\Inc\NXP\LPC17xx\LPC17xx.H
+.\main.o: H:\Programas\Keil\ARM\CMSIS\Include\core_cm3.h
+.\main.o: H:\Programas\Keil\ARM\ARMCC\bin\..\include\stdint.h
+.\main.o: H:\Programas\Keil\ARM\CMSIS\Include\core_cmInstr.h
+.\main.o: H:\Programas\Keil\ARM\CMSIS\Include\core_cmFunc.h
+.\main.o: H:\Programas\Keil\ARM\Inc\NXP\LPC17xx\system_LPC17xx.h
+.\main.o: lcddriver.h
+.\main.o: H:\Programas\Keil\ARM\ARMCC\bin\..\include\stdio.h
+.\main.o: H:\Programas\Keil\ARM\ARMCC\bin\..\include\stdlib.h
+.\main.o: H:\Programas\Keil\ARM\ARMCC\bin\..\include\Math.h
+.\main.o: configuraciones.h
+.\main.o: funciones.h
+.\main.o: interrupciones.h
