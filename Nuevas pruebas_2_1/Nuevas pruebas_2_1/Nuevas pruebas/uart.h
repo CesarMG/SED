@@ -31,7 +31,6 @@ extern char tx_completa;		// Flag de transmisión de cadena completa
 extern void uart0_init(int baudrate);
 extern void tx_cadena_UART0(char *ptr);
 
-extern char buffer_bt[30];	// Buffer de recepción
 extern char *ptr_rx_bt;	// puntero de recepción
 extern char rx_completa_bt;// Flag de recepción de cadena completa que se activa al recibir CR(0x0D)
 extern char *ptr_tx_bt;			// puntero de transmisión

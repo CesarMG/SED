@@ -42,10 +42,8 @@ void TIMER0_IRQHandler(void)	//TIMER0 (cada 0,5 seg)
 	temp_I2C=leer_Temperatura_I2C();
 	LPC_ADC->ADCR|=(1<<24);							//Que empiece la conversion ahora
 
-	if((mode==112)&&(FLAG_ISP==1))
-		generar_pulso_alto();
 	
-	else if((mode==212)&&(disparo==1))
+	if(FLAG_DISPARO_CONTINUO==1)
 		generar_pulso_alto();
 	
 	else if((FLAG_AUTO==1)&&(grados<=180))
@@ -78,10 +76,14 @@ void TIMER0_IRQHandler(void)	//TIMER0 (cada 0,5 seg)
 			DAC_ON = 0;
 		}
 	}
-	if(FLAG_ONLINE == 1)
-		mostrar_resultados();
-	else if(FLAG_OFFLINE == 1)
+	/*
+	if(FLAG_OFFLINE == 1)
+		
+	else if(FLAG_ONLINE == 1)
+		//tx_cadena_UART0("EY");
 		mostrar_medidas_uart();
+	*/
+		//mostrar_resultados();
 }//TIMER0_IRQHandler
 
 void TIMER1_IRQHandler(void)												// TIMER del DAC
@@ -118,9 +120,19 @@ void TIMER3_IRQHandler(void) 													//TIMER para el Capture
 void ADC_IRQHandler(void)
 {
 	float temperatura;
-	
+	if(FLAG_TIMER0 && FLAG_OFFLINE)
+	{
+		FLAG_TIMER0 = 0;
+		mostrar_resultados();
+	}
+	else if(FLAG_TIMER0 && FLAG_ONLINE && tx_completa)
+	{
+		FLAG_TIMER0 = 0;
+		mostrar_medidas_uart();
+	}
 	temperatura=((LPC_ADC->ADDR2>>4)&0xFFF)/4095.0*3300/10.0;
 	
 	if(temperatura_global != temperatura)	//si la nueva temperatura es diferente que la anterior
 		temperatura_global=temperatura;
+	
 }

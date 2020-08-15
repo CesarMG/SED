@@ -33,7 +33,7 @@ extern uint8_t FLAG_TIMER2; // Flag timer 2
 extern uint8_t FLAG_TIMER3; // Flag timer 3
 extern uint8_t mode;			 	// variable de modo activo
 extern uint8_t modo_selec;	// flag de seleccion de modo terminado
-
+extern uint8_t FLAG_DISPARO_CONTINUO; // Flag 
 extern uint8_t grados;
 extern uint8_t pulsos;
 extern int umbral;

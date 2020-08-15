@@ -48,6 +48,7 @@ uint8_t FLAG_OFFLINE;
 uint8_t DAC_ON = 0;						// Flag activacion DAC
 uint8_t FLAG_MENU = 0;
 uint8_t FLAG_init_timer = 0;
+uint8_t FLAG_DISPARO_CONTINUO = 0;
 //////////// ZONA PARA VARIABLES GLOBALES//////////
 
 uint8_t mode		  = 0;  // Variable de modo activo 
@@ -66,7 +67,7 @@ uint16_t muestras[N_muestras];  // Array que contiene al seno
 
 
 
-char buffer[30]; // Buffer de recepción de 200 caracteres
+char buffer[30] ; // Buffer de recepción de 200 caracteres
 
 char *ptr_rx; // Puntero de recepción
 char rx_completa; // Flag de recepción de cadena que se activa a "1" al recibir la tecla return CR(ASCII=13)
@@ -107,9 +108,9 @@ int main()
 		switch(mode)
 		{
 			case INICIO:
-				if(FLAG_menu == 0)
+				if(FLAG_MENU == 0)
 				{
-					FLAG_menu = 1;	// Evitamos que ponga continuamente el menu
+					FLAG_MENU	= 1;	// Evitamos que ponga continuamente el menu
 					//Encabezado
 
 					drawString(100,22, "UAH-SED", BLACK, WHITE, MEDIUM);
@@ -174,6 +175,7 @@ int main()
 					mode        = 13;	  	// Modo deteccion seleccionado
 					FLAG_MENU 	= 0; 			// Permitimos que aparezca el siguiente menu 
 				}	
+
 			break;
 				
 				
@@ -182,8 +184,14 @@ int main()
 				fillScreen(BLACK);
 				do
 				{
+					if(FLAG_MENU ==0)
+					{
 						tx_cadena_UART0("Introduce: \n 1. Modo manual \n 2. Modo automatico \n 3. Modo deteccion de obstaculos \n\r");
-						while(rx_completa==0); // Espera a que la recepcion del mensaje acabe con un ENTER (CR)
+						while(tx_completa==0); // Espera a que la recepcion del mensaje acabe con un ENTER (CR)
+						FLAG_MENU = 1;
+					}	
+					if(rx_completa)
+						{
 						if(strcmp (buffer, "1\r") == 0)
 								mode = ONLINE_M;
 						 
@@ -196,147 +204,217 @@ int main()
 						
 						else 
 							tx_cadena_UART0("\n\rOpcion seleccionada incorrecta \n\r");
-						
-				}while (mode == ONLINE);			
-			break;
-
-				
-				
-				
-				
-			case ONLINE_M:
-				
-					
-				set_servo(grados = 90);	 // Inicializamos servo a la posicion 90º
-			
-				do
-				{
-					tx_cadena_UART0("Introduce: \n 1. Disparo unico \n 2. Disparos continuos \n\r");
-					while(rx_completa==0);
-					if(strcmp (buffer, "1\r") == 0) 
-						mode = ONLINE_M_U;
-					else if(strcmp (buffer, "2\r") == 0) 
-						mode = ONLINE_M_C;
-					else 
-						tx_cadena_UART0("\n\rOpcion seleccionada incorrecta\n\r");
-								
-				} while (mode == ONLINE_M);
-				
-			break;
-				
-			case 211:	// Modo manual - medidas manuales (online)
-				do
-				{
-					if(FLAG_MENU== 0)
-					{
-						tx_cadena_UART0("Introduce: \n 1. Mover el servo a la derecha -> + \n 2. Mover el servo hacia la izquierda -> - \n 3. Disparar -> S \n\r");
-						while(tx_completa==0);
-						tx_completa=0;					//Se transmite la cadena de buffer	
-						FLAG_MENU=1;
+						rx_completa = 0;
 					}
-					while(rx_completa==0);
-					rx_completa=0;				// Borrar flag
-					if(strcmp (buffer, "+\r") == 0) 
-					{
-						if(grados<180)
-							set_servo(grados+=10);
-	//					sprintf(buffer_grad, "\n Angulo del servo : %d grados          ", grados );
-	//					tx_cadena_UART0(buffer_grad);
-	//					while(tx_completa==0);
-	//					tx_completa=0;					//Se transmite la cadena de buffer	
-						aux=1;
-					} 
-					else if(strcmp (buffer, "-\r") == 0) 
-					{
-						if(grados<180)
-							set_servo(grados-=10);
-	//					sprintf(buffer_grad, "\n Angulo del servo : %d grados          ", grados );
-	//					tx_cadena_UART0(buffer_grad);
-	//					while(tx_completa==0);
-	//					tx_completa=0;					//Se transmite la cadena de buffer	
-						aux=1;
-					}  
-					else if(strcmp (buffer, "S\r") == 0)
-					{
-						generar_pulso_alto();
-					}		
-					else 
-					{
-						tx_cadena_UART0("\n\rOpcion seleccionada incorrecta\n\r");
-					}			
+				}while (mode == ONLINE);	
+				FLAG_MENU = 0;
+				FLAG_ONLINE = 1;
+			break;
 
-				} while (aux==0);
-				aux=0;
-				if(FLAG_init_timer == 0)
+			case OFFLINE_M:	// Modo manual (offline)
+				
+				if(FLAG_MENU == 0)
 				{
-					LPC_TIM0->TCR   |= (1<<0);			// Habilitamos timer 0
-					LPC_TIM3->TCR        = 0x01;    // Enable Timer 3
-					FLAG_init_timer  =  1;					// Timer 0 inicializado
-				}
-
-		break;
+					FLAG_MENU = 1; 	
+					fillScreen(BLACK);
+					drawString(100,22, "UAH-SED", BLACK, WHITE, MEDIUM);
+					drawString(20, 52, "PROYECTO SONAR ULTRASONICO", WHITE, BLACK, MEDIUM);
+					drawString(20, 72, "Ana Belen Bartolome", WHITE, BLACK, MEDIUM);
+					drawString(20, 92, "Cesar Murciego", WHITE, BLACK, MEDIUM);
 			
-		case 212: // Modo manual - medidas continuas (online)
+					drawString(30, 125, "Elija una opcion:", WHITE, BLACK, MEDIUM);
+					drawString(30, 155, "1) Disparo unico:", WHITE, BLACK, MEDIUM);
+					drawString(70, 175, "-> KEY 1", WHITE, BLACK, MEDIUM);
+					drawString(30, 195, "2) Disparos continuos:", WHITE, BLACK, MEDIUM);
+					drawString(70, 215, "-> KEY 2", WHITE, BLACK, MEDIUM);
+					set_servo(grados = 90);	 // Inicializamos servo a la posicion 90º
+				}
+				
+				if(FLAG_KEY1 == 1)	// Se ha pulsado KEY1 (único)
+				{
+					FLAG_KEY1   = 0;			  		// Borramos flag de KEY1	
+					mode        = OFFLINE_M_U;			// Modo disparo unico seleccionado
+					FLAG_MENU = 0; 		  				// Permitimos que aparezca el siguiente menu 
+				}
+				
+				if(FLAG_KEY2 == 1)  // Se ha pulsado KEY2 (continuo)
+				{
+					FLAG_KEY2   = 0;			  		// Borramos flag de KEY2
+					mode        = OFFLINE_M_C;	// Modo disparos continuos seleccionado
+					FLAG_MENU = 0; 			  			// Permitimos que aparezca el siguiente menu 
+				}
+		break;
+		
+		case OFFLINE_M_U:	// Modo manual - medida unica (offline)
+			if(FLAG_MENU == 0)
+			{
+				FLAG_MENU = 1;
+				fillScreen(BLACK);
+
+				drawString(30, 10, "Elija una opcion:", WHITE, BLACK, SMALL);
+				drawString(30, 20, "1) Servo: -10 grados", WHITE, BLACK, SMALL);
+				drawString(70, 30, "-> KEY 1", WHITE, BLACK, SMALL);
+				drawString(30, 40, "2) Servo: +10 grados", WHITE, BLACK, SMALL);
+				drawString(70, 50, "-> KEY 2", WHITE, BLACK, SMALL);
+				drawString(30, 60, "3) Disparo ultrasonidos:", WHITE, BLACK, SMALL);	
+				drawString(70, 70, "-> ISP", WHITE, BLACK, SMALL);
+				FLAG_EINT0_PULSO = 1;
+				FLAG_EINT_SERVO  = 1;
+				FLAG_OFFLINE = 1;
+			}
+		  if(FLAG_init_timer == 0)
+			{
+				LPC_TIM0->TCR   |= (1<<0);			// Habilitamos timer 0
+				LPC_TIM3->TCR        = 0x01;    // Enable Timer 3
+				FLAG_init_timer  =  1;					// Timer 0 inicializado
+			}
+			
+			
+		
+			
+		break;
+		
+		case OFFLINE_M_C: // Modo manual - medidas continuas (offline)
+			if(FLAG_MENU ==0)
+			{
+				FLAG_MENU = 1;
+				fillScreen(BLACK);
+				drawString(30, 10, "Elija una opcion:", WHITE, BLACK, SMALL);
+				drawString(30, 20, "1) Servo: -10 grados", WHITE, BLACK, SMALL);
+				drawString(70, 30, "-> KEY 1", WHITE, BLACK, SMALL);
+				drawString(30, 40, "2) Servo: +10 grados", WHITE, BLACK, SMALL);
+				drawString(70, 50, "-> KEY 2", WHITE, BLACK, SMALL);
+				drawString(30, 60, "3) Disparo ultrasonidos:", WHITE, BLACK, SMALL);	
+				drawString(70, 70, "-> ISP", WHITE, BLACK, SMALL);
+				FLAG_EINT_SERVO  = 1;
+				FLAG_OFFLINE = 1;
+			}
 			if(FLAG_init_timer == 0)
 			{
 				LPC_TIM0->TCR   |= (1<<0);			// Habilitamos timer 0
 				LPC_TIM3->TCR        = 0x01;    // Enable Timer 3
 				FLAG_init_timer  =  1;					// Timer 0 inicializado
-				set_servo(grados=0);
 			}
-			do
-			{
+			
+			if(FLAG_ISP)
+				FLAG_DISPARO_CONTINUO = 1;
+			
+		break;
+			
+			case ONLINE_M:
+				
+				set_servo(grados = 90);	 // Inicializamos servo a la posicion 90º
+			
+				do
+				{
+					if(FLAG_MENU ==0)
+					{
+						tx_cadena_UART0("Introduce: \n 1. Disparo unico \n 2. Disparos continuos \n\r");
+						while(tx_completa==0); // Espera a que la recepcion del mensaje acabe con un ENTER (CR)
+						FLAG_MENU = 1;
+					}	
+					if(rx_completa == 1)
+					{
+						
+						if(strcmp (buffer, "1\r") == 0) 
+							mode = ONLINE_M_U;
+						else if(strcmp (buffer, "2\r") == 0) 
+							mode = ONLINE_M_C;
+						else 
+							tx_cadena_UART0("\n\rOpcion seleccionada incorrecta\n\r");
+						rx_completa = 0;
+					}
+								
+				} while (mode == ONLINE_M);
+				FLAG_MENU = 0;
+			break;
+				
+			case ONLINE_M_U:	// Modo manual - medidas manuales (online)
+								
+				if(FLAG_init_timer == 0)
+				{
+					LPC_TIM0->TCR   |= (1<<0);	// Habilitamos timer 0
+					LPC_TIM3->TCR    =  0x01;   // Enable Timer 3
+					FLAG_init_timer  =  1;			// Timer 0 inicializado
+				}
+				
 				if(FLAG_MENU == 0)
 				{
 					tx_cadena_UART0("Introduce: \n 1. Mover el servo a la derecha -> + \n 2. Mover el servo hacia la izquierda -> - \n 3. Disparar -> S \n\r");
-					FLAG_MENU=1;
+					while(tx_completa == 0);
+					FLAG_MENU = 1;
 				}
-				while(rx_completa==0);
-				rx_completa=0;				// Borrar flag
+				
+				if(rx_completa == 1)
+				{
+				
+					if(strcmp (buffer, "+\r") == 0) 
+					{
+						if(grados<180)
+							set_servo(grados+=10);
+					} 
+					else if(strcmp (buffer, "-\r") == 0) 
+					{
+						if(grados<180)
+							set_servo(grados-=10);
+					}  
+					else if(strcmp (buffer, "S\r") == 0)
+						generar_pulso_alto();
+
+					else 
+						tx_cadena_UART0("\n\rOpcion seleccionada incorrecta\n\r");
+					rx_completa = 0;
+				}
+		break;
+			
+		case ONLINE_M_C: // Modo manual - medidas continuas (online)
+			if(FLAG_init_timer == 0)
+			{
+				LPC_TIM0->TCR   |= (1<<0);			// Habilitamos timer 0
+				LPC_TIM3->TCR        = 0x01;    // Enable Timer 3
+				FLAG_init_timer  =  1;					// Timer 0 inicializado
+			}
+			
+			if(FLAG_MENU == 0)
+			{
+				tx_cadena_UART0("Introduce: \n 1. Mover el servo a la derecha -> + \n 2. Mover el servo hacia la izquierda -> - \n 3. Disparar -> S \n\r");
+				while(tx_completa == 0);
+				FLAG_MENU=1;
+			}
+				
+				
+			if(rx_completa == 1)
+			{
 				if(strcmp (buffer, "+\r") == 0) 
 				{
-					if(grados<190)
+					if(grados<180)
 						set_servo(grados+=10);
-//					sprintf(buffer_grad, "\n Angulo del servo : %d grados          ", grados );
-//					tx_cadena_UART0(buffer_grad);
-//					while(tx_completa==0);
-//					tx_completa=0;					//Se transmite la cadena de buffer	
-					//aux3 = 1;
-						aux=1;
+	
 				}
 				else if(strcmp (buffer, "-\r") == 0) 
 				{
 					if(grados>0)
 						set_servo(grados-=10);
-//					sprintf(buffer_grad, "\n Angulo del servo : %d grados          ", grados );
-//					tx_cadena_UART0(buffer_grad);
-//					while(tx_completa==0);
-//					tx_completa=0;					//Se transmite la cadena de buffer	
-					//aux3 = 1;
-						aux=1;
 				}  
 				else if(strcmp (buffer, "S\r") == 0)
 				{
-					disparo = 1;
-					aux = 1;
+					FLAG_DISPARO_CONTINUO = 1;
 				}		
 				else 
 				{
 					tx_cadena_UART0("\n\rOpcion seleccionada incorrecta\n\r");
-					aux=1;
 				}
-				//aux3 = 0;				
-		  } while (aux==0);
-			aux=0;
 
-			break;
+			}
+			
+		break;
 
+		
 			
 			
-			
-			case TEST:
-				set_servo(10);
-			break;
+		case TEST:
+			set_servo(10);
+		break;
 			
 		}
 	}

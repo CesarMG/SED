@@ -83,18 +83,19 @@ void mostrar_resultados()			// Muestra los resultados por pantalla
 
 void mostrar_medidas_uart()			//COLOCAR EN EL IRQ DEL TIMER 0 (del que interrumpe cada 0.5 seg)- ADC_HANDLER
 {
-	char buff[25];
+	char buff[50];
 	
 	sprintf(buff, "\n Temperatura LM35 : %3.2f grados ", temperatura_global);
 	tx_cadena_UART0(buff);
-	while(tx_completa==0);
+	while(tx_completa == 0);
 	
 	sprintf(buff, "\n Temperatura I2C : %3.2f grados ", temperaturaI2C);
 	tx_cadena_UART0(buff);
-	while(tx_completa==0);
+	while(tx_completa == 0);
 	
 	sprintf(buff, "\n Distancia : %3.2f grados", distancia);
 	tx_cadena_UART0(buff);
-	while(tx_completa==0);
+	while(tx_completa == 0);
+	//tx_completa = 0;
 	
 }//mostrar_medidas_uart
