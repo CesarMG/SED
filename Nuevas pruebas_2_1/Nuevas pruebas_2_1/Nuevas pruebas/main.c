@@ -200,7 +200,7 @@ int main()
 					}
 			break;
 			
-			case OFFLINE_M_U:	   // Modo manual - medida unica (offline)
+			case OFFLINE_M_U:	     // Modo manual - medida unica (offline)
 				if(FLAG_MENU == 0)
 				{
 					FLAG_MENU = 1;     // Menu puesto en pantalla 
@@ -254,55 +254,54 @@ int main()
 				
 			break;
 			
-			case OFFLINE_A:	    // Modo 12:  Automatico (offline)
+			case OFFLINE_A:	    		// Modo 12:  Automatico (offline)
 				if(FLAG_MENU==0)
 				{
-					FLAG_MENU = 1;     // Menu puesto en pantalla 
+					FLAG_MENU = 1;      // Menu puesto en pantalla 
 			
 					fillScreen(BLACK);
 					drawString(100,22, "UAH-SED", BLACK, WHITE, MEDIUM);
 					drawString(20, 52, "PROYECTO SONAR ULTRASONICO", WHITE, BLACK, MEDIUM);
 					drawString(20, 72, "Ana Belen Bartolome", WHITE, BLACK, MEDIUM);
 					drawString(20, 92, "Cesar Murciego", WHITE, BLACK, MEDIUM);
-					set_servo(grados = 0);
-					FLAG_OFFLINE = 1;
-					FLAG_AUTO 	 = 1;
+					set_servo(grados = 0);	// Inicializamos servo a 0º
+					FLAG_OFFLINE = 1;				// Modo offline activado
+					FLAG_AUTO 	 = 1;				// Modo autmatico activado
 				}
 				if(FLAG_init_timer == 0)
 				{
-					LPC_TIM0->TCR   |= (1<<0);				// Habilitamos timer 0
-					LPC_TIM3->TCR        = 0x01;      // Enable Timer	3		
-					FLAG_init_timer  =  1;						// Timer 0 inicializado
+					LPC_TIM0->TCR   |= (1<<0);		// Habilitamos timer 0
+					LPC_TIM3->TCR    = 0x01;      // Enable Timer	3		
+					FLAG_init_timer  =  1;				// Timer 0 inicializado
 				}
 			break;
 
 			case OFFLINE_D:	// Modo Deteccion obstaculos (offline)
 				if(FLAG_MENU == 0)
 				{
-					FLAG_MENU = 1;
+					FLAG_MENU = 1;      // Menu puesto en pantalla 
 					fillScreen(BLACK);
 					drawString(100,22, "UAH-SED", BLACK, WHITE, MEDIUM);
 					drawString(20, 52, "PROYECTO SONAR ULTRASONICO", WHITE, BLACK, MEDIUM);
 					drawString(20, 72, "Ana Belen Bartolome", WHITE, BLACK, MEDIUM);
 					drawString(20, 92, "Cesar Murciego", WHITE, BLACK, MEDIUM);
 					set_servo(grados = 90);	 // Inicializamos servo a la posicion 90º
-					FLAG_OFFLINE 	= 1;
-					FLAG_DETEC		= 1;
-					FLAG_EINT_SERVO = 1;
+					FLAG_OFFLINE   	= 1;     // Modo offline activado
+					FLAG_DETEC		  = 1;     // Modo deteccion activado
+					FLAG_EINT_SERVO = 1;     // Habilitamos movimiento con KEY1 y KEY2
 				}
 				
 				
 				if(FLAG_init_timer == 0)
 				{
-					LPC_TIM0->TCR   |= (1<<0);				// Habilitamos timer 0
-					LPC_TIM3->TCR    = 0x01;          // Enable Timer 3
-					FLAG_init_timer  =  1;						// Timer 0 inicializado
+					LPC_TIM0->TCR   |= (1<<0);		// Habilitamos timer 0
+					LPC_TIM3->TCR    = 0x01;      // Enable Timer 3
+					FLAG_init_timer  =  1;			  // Timer 0 inicializado
 				}			
 				
-	
 			break;
 				
-			case ONLINE:
+			case ONLINE:	// Modo 2: online
 				fillScreen(BLACK);
 				do
 				{
@@ -310,31 +309,28 @@ int main()
 					{
 						tx_cadena_UART0("Introduce: \n 1. Modo manual \n 2. Modo automatico \n 3. Modo deteccion de obstaculos \n\r");
 						while(tx_completa==0); // Espera a que la recepcion del mensaje acabe con un ENTER (CR)
-						FLAG_MENU = 1;
+						FLAG_MENU = 1;         // Menu puesto en pantalla 
 					}	
 					if(rx_completa)
 						{
 						if(strcmp (buffer, "1\r") == 0)
-								mode = ONLINE_M;
+							mode = ONLINE_M;		 // Modo online manual seleccionado
 						 
 						else if(strcmp (buffer, "2\r") == 0) 
-							mode = ONLINE_A;
+							mode = ONLINE_A;		 // Modo online automatico seleccionado
 	
-						
 						else if(strcmp (buffer, "3\r") == 0) 
-							mode = ONLINE_D;
+							mode = ONLINE_D;		 // Modo online deteccion seleccionado
 						
 						else 
 							tx_cadena_UART0("\n\rOpcion seleccionada incorrecta \n\r");
 						rx_completa = 0;
 					}
 				}while (mode == ONLINE);	
-				FLAG_MENU = 0;
+				FLAG_MENU 	= 0;								
 				FLAG_ONLINE = 1;
 			break;
 
-			
-			
 			case ONLINE_M:
 				
 				set_servo(grados = 90);	 // Inicializamos servo a la posicion 90º
@@ -345,21 +341,20 @@ int main()
 					{
 						tx_cadena_UART0("Introduce: \n 1. Disparo unico \n 2. Disparos continuos \n\r");
 						while(tx_completa==0); // Espera a que la recepcion del mensaje acabe con un ENTER (CR)
-						FLAG_MENU = 1;
+						FLAG_MENU = 1;         // Menu puesto en pantalla 
 					}	
 					if(rx_completa == 1)
 					{
-						
 						if(strcmp (buffer, "1\r") == 0) 
-							mode = ONLINE_M_U;
+							mode = ONLINE_M_U;   // Modo online medida unica 
 						else if(strcmp (buffer, "2\r") == 0) 
-							mode = ONLINE_M_C;
+							mode = ONLINE_M_C;   // Modo online medidas continuas
 						else 
 							tx_cadena_UART0("\n\rOpcion seleccionada incorrecta\n\r");
 						rx_completa = 0;
 					}				
 				} while (mode == ONLINE_M);
-				FLAG_MENU = 0;
+				FLAG_MENU = 0;            // Menu puesto en pantalla 
 			break;
 				
 			case ONLINE_M_U:	// Modo manual - medidas manuales (online)
@@ -375,11 +370,11 @@ int main()
 				{
 					tx_cadena_UART0("Introduce: \n 1. Mover el servo a la derecha -> + \n 2. Mover el servo hacia la izquierda -> - \n 3. Disparar -> S \n\r");
 					while(tx_completa == 0);
-					FLAG_MENU = 1;
+					FLAG_MENU = 1;         // Menu puesto en pantalla 
 				}
 			break;
 			
-			case ONLINE_M_C: // Modo manual - medidas continuas (online)
+			case ONLINE_M_C:   // Modo manual - medidas continuas (online)
 				if(FLAG_init_timer == 0)
 				{
 					LPC_TIM0->TCR   |= (1<<0);			// Habilitamos timer 0
@@ -391,22 +386,21 @@ int main()
 				{
 					tx_cadena_UART0("Introduce: \n 1. Mover el servo a la derecha -> + \n 2. Mover el servo hacia la izquierda -> - \n 3. Disparar -> S \n\r");
 					while(tx_completa == 0);
-					FLAG_MENU=1;
+					FLAG_MENU = 1;         // Menu puesto en pantalla 
 				}
 					
-				
 			break;
 			
 			case ONLINE_A:	// Modo Automatico (online)
 				
 				if(FLAG_init_timer == 0)
 				{
-					LPC_TIM0->TCR   |= (1<<0);				// Habilitamos timer 0
-					LPC_TIM3->TCR        = 0x01;      // Enable Timer	3		
-					FLAG_init_timer  =  1;						// Timer 0 inicializado
-					set_servo(grados = 0);
-					FLAG_ONLINE  = 1;
-					FLAG_AUTO 	 = 1;
+					LPC_TIM0->TCR   |= (1<<0);		// Habilitamos timer 0
+					LPC_TIM3->TCR        = 0x01;  // Enable Timer	3		
+					FLAG_init_timer  =  1;				// Timer 0 inicializado
+					set_servo(grados = 0);				// Inicializamos servo a posicion 0
+					FLAG_ONLINE  = 1;							// Modo online activado
+					FLAG_AUTO 	 = 1;							// Modo automatico activado
 				}
 			break;
 			
@@ -414,8 +408,6 @@ int main()
 			
 			case ONLINE_D:	// Modo Deteccion obstaculos (online)
 
-		
-	
 				if(FLAG_init_timer == 0)
 				{
 					LPC_TIM0->TCR   |= (1<<0);				// Habilitamos timer 0
@@ -424,14 +416,11 @@ int main()
 					set_servo(grados = 90);	 // Inicializamos servo a la posicion 90º
 					tx_cadena_UART0("Introduce: \n 1. Mover el servo a la derecha -> + \n 2. Mover el servo hacia la izquierda -> - \n 3. Disparar -> S \n 4. Establecer nuevo umbral -> U \n\r");
 					while(tx_completa==0);
-					//FLAG_ONLINE 	= 1;
 					FLAG_DETEC		= 1;
 				}
 				
 			break;
 			
-		
-
 		case TEST:
 			set_servo(10);
 		break;
