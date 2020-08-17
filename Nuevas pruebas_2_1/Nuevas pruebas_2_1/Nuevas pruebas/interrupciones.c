@@ -11,7 +11,7 @@ void EINT0_IRQHandler() 	 		// KEY ISP (P2.10)
 	FLAG_ISP        = 1;				// Activamos flag del boton
 	
 	if(FLAG_EINT0_PULSO)
-		generar_pulso_alto();
+		generar_pulso_alto();     // Enviamos pulso del trigger
 
 }// EINT0_IRQHandler
 
@@ -43,55 +43,46 @@ void TIMER0_IRQHandler(void)	//TIMER0 (cada 0,5 seg)
 	LPC_ADC->ADCR|=(1<<24);							//Que empiece la conversion ahora
 
 	
-	if(FLAG_DISPARO_CONTINUO==1)
-		generar_pulso_alto();
+	if(FLAG_DISPARO_CONTINUO==1)// Si es modo continuo
+		generar_pulso_alto();     // Enviamos pulso del trigger
 	
 	else if((FLAG_AUTO==1)&&(grados<=180))
 	{
-		generar_pulso_alto();
-		if(grados == 180)
-			set_servo(grados = 0);		
+		generar_pulso_alto();     // Enviamos pulso del trigger
+		if(grados == 180)					// Si hemos llegado al final
+			set_servo(grados = 0);	// Volver a 0
 		
 		else
-			set_servo(grados += 10);
-		
+			set_servo(grados += 10);// Mover servo
 	}
 	
 	else if(FLAG_DETEC == 1)	//modo deteccion obstaculos
 	{
-		generar_pulso_alto();
+		generar_pulso_alto();    // Enviamos pulso del trigger
 		
-		if(distancia <= umbral)
+		if(distancia <= umbral)  // Si esta dentro del umbral
 		{
 			frecuencia = 5000-umbral*10;								  		//Aplico la formula dada
-			if (DAC_ON == 0)
+			if (DAC_ON == 0)			 // si no esta sonando
 			{
 				LPC_TIM1->MR0 = (Fpclk/frecuencia/N_muestras)-1;		//Saco la frecuencia por el Match
-				LPC_TIM1->TCR = (1<<0)|(0<<1);															// Habilitamos TIMER1		
-				DAC_ON = 1;
+				LPC_TIM1->TCR = (1<<0)|(0<<1);											// Habilitamos TIMER1		
+				DAC_ON = 1;																					// Sonando
 			}
 		}
-		else if (DAC_ON == 1)
+		else if (DAC_ON == 1) //Si estaba sonando y fuera del umbral
 		{
-			LPC_TIM1->TCR = (0<<0)|(1<<1);			// Deshabilitamos time1
-			DAC_ON = 0;
+			LPC_TIM1->TCR = (0<<0)|(1<<1);			// Deshabilitamos timer1
+			DAC_ON = 0;     										// Deja de sonar							
 		}
 		if(FLAG_TIMER0 && FLAG_OFFLINE && (FLAG_DETEC))
 		{
 			FLAG_TIMER0 = 0;
-			mostrar_resultados_DAC();
-			//FLAG_ADC= 1;
+			mostrar_resultados_DAC();		
 		}
 		
 	}
-	/*
-	if(FLAG_OFFLINE == 1)
-		
-	else if(FLAG_ONLINE == 1)
-		//tx_cadena_UART0("EY");
-		mostrar_medidas_uart();
-	*/
-		//mostrar_resultados();
+
 }//TIMER0_IRQHandler
 
 void TIMER1_IRQHandler(void)												// TIMER del DAC
